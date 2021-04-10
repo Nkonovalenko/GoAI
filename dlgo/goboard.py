@@ -1,4 +1,5 @@
 import copy
+from dlgo import zobrist
 from dlgo.gotypes import Player
 
 class Move():
