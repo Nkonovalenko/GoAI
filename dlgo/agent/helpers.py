@@ -9,8 +9,8 @@ def is_point_an_eye(board, point, color):
     for neighbor in point.neighbors():
         if board.is_on_grid(neighbor):
             neighbor_color = board.get(neighbor)
-        if neighbor_color != color:
-            return False
+            if neighbor_color != color:
+                return False
 
     # Must control 3 of 4 corners if point in middle of board
     # Must control all corners if point is on edge of board

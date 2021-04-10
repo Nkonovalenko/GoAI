@@ -5,7 +5,7 @@ class Move():
     """Class handling any action a player can play."""
     def __init__(self, point=None, is_pass=False, is_resign=False):
         """Initilize a move."""
-        assert (point is nont None) ^ is_pass ^ is_resign
+        assert (point is not None) ^ is_pass ^ is_resign
         self.point = point
         self.is_play = (self.point is not None)
         self.is_pass = is_pass
@@ -64,7 +64,7 @@ class GoString():
 
 class Board():
     """Handle Board object."""
-    def __init__(selfl, num_rows, num_cols):
+    def __init__(self, num_rows, num_cols):
         """Initialize an empty grid with specified rows and cols."""
         self.num_rows = num_rows
         self.num_cols = num_cols
@@ -179,7 +179,7 @@ class GameState():
 
     def is_move_self_capture(self, player, move):
         """Check whether move violates self capture rule."""
-        if not move.is_paly:
+        if not move.is_play:
             return False
         next_board = copy.deepcopy(self.board)
         next_board.place_stone(player, move.point)
