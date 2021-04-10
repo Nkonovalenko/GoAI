@@ -75,7 +75,7 @@ class Board():
         # Define variables
         assert self.is_on_grid(point)
         assert self._grid.get(point) is None
-        adjecent_same_color = []
+        adjacent_same_color = []
         adjacent_opposite_color = []
         liberties = []
 
@@ -88,16 +88,16 @@ class Board():
             if neighbor_string is None:
                 liberties.append(neighbor)
             elif neighbor_string.color == player:
-                if neighbor_string not in adjecent_same_color:
-                    adjecent_same_color.append(neighbor_string)
+                if neighbor_string not in adjacent_same_color:
+                    adjacent_same_color.append(neighbor_string)
             else:
                 if neighbor_string not in adjacent_opposite_color:
                     adjacent_opposite_color.append(neighbor_string)
         new_string = GoString(player, [point], liberties)
 
         # Merge any adjacent strings of the same color and add to grid
-        for adjecent_same_color in adjecent_same_color:
-            new_string = new_string.merged_with(adjecent_same_color)
+        for same_color_string in adjacent_same_color:
+            new_string = new_string.merged_with(same_color_string)
         for new_string_point in new_string.stones:
             self._grid[new_string_point] = new_string
 
