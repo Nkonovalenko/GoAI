@@ -30,17 +30,20 @@ class GoString():
     """A chain of connected stones of the same color."""
     def __init__(self, color, stones, liberties):
         """Initilize a GoString."""
+        # Stones and liberties are immutable as frozensets
         self.color = color
-        self.stones = set(stones)
-        self.liberties = set(liberties)
+        self.stones = frozenset(stones)
+        self.liberties = frozenset(liberties)
 
-    def remove_liberty(self, point):
+    def without_liberty(self, point):
         """Remove a liberty."""
-        self.liberties.remove(point)
+        new_liberties = self.liberties - set([point])
+        return GoString(self.color, self.stones, new_liberties)
 
-    def add_liberty(self, point):
+    def with_liberty(self, point):
         """Add a liberty."""
-        self.liberties.add(point)
+        new_liberties = self.liberties | set([point])
+        return GoString(self.color, self.stones, new_liberties)
 
     def merged_with(self, go_string):
         """Retrun a new GoString containing all stones in both strings."""
@@ -69,13 +72,14 @@ class Board():
         self.num_rows = num_rows
         self.num_cols = num_cols
         self._grid = {}
+        self._hash = zobrist.EMPTY_BOARD
 
     def place_stone(self, player, point):
         """Place stone after inspecting if given point has liberties."""
         # Define variables
         assert self.is_on_grid(point)
         assert self._grid.get(point) is None
-        adjecent_same_color = []
+        adjacent_same_color = []
         adjacent_opposite_color = []
         liberties = []
 
@@ -88,27 +92,46 @@ class Board():
             if neighbor_string is None:
                 liberties.append(neighbor)
             elif neighbor_string.color == player:
-                if neighbor_string not in adjecent_same_color:
-                    adjecent_same_color.append(neighbor_string)
+                if neighbor_string not in adjacent_same_color:
+                    adjacent_same_color.append(neighbor_string)
             else:
                 if neighbor_string not in adjacent_opposite_color:
                     adjacent_opposite_color.append(neighbor_string)
         new_string = GoString(player, [point], liberties)
 
         # Merge any adjacent strings of the same color and add to grid
-        for adjecent_same_color in adjecent_same_color:
-            new_string = new_string.merged_with(adjecent_same_color)
+        for same_color_string in adjacent_same_color:
+            new_string = new_string.merged_with(same_color_string)
         for new_string_point in new_string.stones:
             self._grid[new_string_point] = new_string
+        self._hash ^= zobrist.HASH_CODE[point, player]
 
         # Reduce liberties of any adjacent strings of opposite color
         for other_color_string in adjacent_opposite_color:
-            other_color_string.remove_liberty(point)
+            replacement = other_color_string.without_liberty(point)
+            if replacement.num_liberties:
+                self._replace_string(other_color_string.without_liberty(point))
 
         # Remove any opposite-color strings with zero liberties
         for other_color_string in adjacent_opposite_color:
             if other_color_string.num_liberties == 0:
                 self._remove_string(other_color_string)
+
+    def _replace_string(self, new_string):
+        """Update Go Board grid."""
+        for point in new_string.stones:
+            self._grid[point] = new_string
+
+    def _remove_string(self, string):
+        """Update liberties when removing string."""
+        for point in string.stones:
+            for neighbor in point.neighbors():
+                neighbor_string = self._grid.get(neighbor)
+                if neighbor_string is None:
+                    continue
+    def zobrist_hash(self):
+        """Return current Zobrist hash."""
+        return self._hash
 
     def is_on_grid(self, point):
         """Check if given point is on the grid."""
@@ -147,6 +170,12 @@ class GameState():
         self.board = board
         self.next_player = next_player
         self.previous_state = previous
+        if self.previous_state is None:
+            self.previous_states = frozenset()
+        else:
+            self.previous_states = frozenset(
+                previous.previous_states |
+                {(previous.next_player, previous.board.zobrist_hash())})
         self.last_move = move
 
     def apply_move(self, move):
@@ -198,13 +227,8 @@ class GameState():
             return False
         next_board = copy.deepcopy(self.board)
         next_board.place_stone(player, move.point)
-        next_situation = (player.other, next_board)
-        past_state = self.previous_state
-        while past_state is not None:
-            if past_state.situation == next_situation:
-                return True
-            past_state = past_state.previous_state
-        return False
+        next_situation = (player.other, next_board.zobrist_hash())
+        return next_situation in self.previous_states
     
     def is_valid_move(self, move):
         """Check whether move is valid."""
