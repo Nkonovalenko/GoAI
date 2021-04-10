@@ -4,6 +4,7 @@ from dlgo import goboard_slow as goboard
 from dlgo import gotypes
 from dlgo.utils import print_board, print_move
 import time
+import os
 
 def main():
     """Main of bot versus bot match."""
@@ -18,7 +19,8 @@ def main():
         time.sleep(0.3)
 
         # Before each move, clear the screen
-        print(chr(27) + "[2J")
+        # print(chr(27) + "[2J")   uncomment to use escape sequence
+        os.system('cls' if os.name == 'nt' else 'clear')
         print_board(game.board)
         bot_move = bots[game.next_player].select_move(game)
         print_move(game.next_player, bot_move)
