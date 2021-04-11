@@ -1,6 +1,6 @@
 import copy
 from dlgo import zobrist
-from dlgo.gotypes import Player, point
+from dlgo.gotypes import Player, Point
 from dlgo.scoring import compute_game_result
 
 class Move():
