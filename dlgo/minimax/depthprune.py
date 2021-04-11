@@ -1,6 +1,6 @@
 import random
 
-from dlgo.agent import agent
+from dlgo.agent import Agent
 from dlgo.scoring import GameResult
 
 __all__ = [
