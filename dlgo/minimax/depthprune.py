@@ -34,7 +34,7 @@ def best_result(game_state, max_depth, eval_fn):
         next_state = game_state.apply_move(candidate_move)
         opponent_best_result = best_result(
             next_state, max_depth - 1, eval_fn)
-        out_result = -1 * opponent_best_result
+        our_result = -1 * opponent_best_result
         if our_result > best_so_far:
             best_so_far = our_result
 
@@ -48,7 +48,7 @@ class DepthPrunedAgent(Agent):
         self.max_depth = max_depth
         self.eval_fn = eval_fn
 
-    def select_move(salf, game_state):
+    def select_move(self, game_state):
         """Select the best move based on minimax."""
         best_moves = []
         best_score = None
@@ -58,7 +58,7 @@ class DepthPrunedAgent(Agent):
             # Calculate the game state if this move is applied
             next_state = game_state.apply_move(possible_move)
             # Figure out opponent's best move
-            opponent_best_outcome = best_result(next_state, self.max_depth, self-eval_fn)
+            opponent_best_outcome = best_result(next_state, self.max_depth, self.eval_fn)
             # Our outcome is opposite the opponent
             our_best_outcome = -1 * opponent_best_outcome
             if (not best_moves) or our_best_outcome > best_score:
