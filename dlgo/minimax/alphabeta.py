@@ -1,10 +1,10 @@
 import random
 
 from dlgo.agent import Agent
-from dlgo.scoring import GameResult
+from dlgo.gotypes import Player
 
 __all__ = [
-    'AlphaBeta'
+    'AlphaBetaAgent'
 ]
 
 MAX_SCORE = 99999
@@ -43,7 +43,7 @@ def alpha_beta_result(game_state, max_depth, best_black, best_white, eval_fn):
         if game_state.next_player == Player.white:
             if best_so_far > best_white:
                 outcome_for_black = -1 * best_so_far
-                if outcome_for_black < best_black
+                if outcome_for_black < best_black:
                     return best_so_far
         # Update benchmark for black
         elif game_state.next_player == Player.black:
@@ -69,8 +69,12 @@ class AlphaBetaAgent(Agent):
         best_white = MAX_SCORE
 
         # Loop through all legal moves
+        print("Legal Moves: ", len(game_state.legal_moves()))
+        ctr = 0
         for possible_move in game_state.legal_moves():
-            next_state = game-state.apply_move(possible_move)
+            print("Considering move: ", ctr)
+            ctr += 1
+            next_state = game_state.apply_move(possible_move)
             opponent_best_outcome = alpha_beta_result(
                 next_state, self.max_depth, best_black, best_white, self.eval_fn)
 
