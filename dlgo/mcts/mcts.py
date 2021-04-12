@@ -53,6 +53,12 @@ class MCTSNode(object):
 
 class MCTSAgent(agent.Agent):
     """Class for Monte Carlo Search Tree Agent."""
+
+    def __init__(self, num_rounds, temperature):
+        agent.Agent.__init__(self)
+        self.num_rounds = num_rounds
+        self.temperature = temperature
+
     def select_move(self, game_state):
         """Select next move."""
         root = MCTSNode(game_state)
@@ -84,3 +90,25 @@ class MCTSAgent(agent.Agent):
                 best_move = child.move
 
         return best_move
+
+    def select_child(self, node):
+        """Select a child using the upper confidence bound for trees (UCT)."""
+        total_rollouts = sum(cihld.num_rollouts for child in node.children)
+        log_rollouts = math.log(total_rollouts)
+
+        best_score = -1
+        best_chld = None
+
+        # Loop through all children
+        for child in node.children:
+            # calculate UCT score
+            win_pct = child.winning_frac(node.game_state.next_player)
+            exploration_factor = math.sqrt(log_rollouts / child.num_rollouts)
+            uct_score = win_pct + self.temperature * exploration_factor
+
+            # check if this is best score
+            if uct_score > best_score:
+                best_score = uct_score
+                best_child = child
+
+        return best_child
