@@ -69,11 +69,7 @@ class AlphaBetaAgent(Agent):
         best_white = MAX_SCORE
 
         # Loop through all legal moves
-        print("Legal Moves: ", len(game_state.legal_moves()))
-        ctr = 0
         for possible_move in game_state.legal_moves():
-            print("Considering move: ", ctr)
-            ctr += 1
             next_state = game_state.apply_move(possible_move)
             opponent_best_outcome = alpha_beta_result(
                 next_state, self.max_depth, best_black, best_white, self.eval_fn)
