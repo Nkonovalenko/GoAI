@@ -52,3 +52,40 @@ def alpha_beta_result(game_state, max_depth, best_black, best_white, eval_fn):
                 if outcome_for_white < best_white:
                     return best_so_far
     return best_so_far
+
+class AlphaBetaAgent(Agent):
+    """Create agent that uses alpha beta pruning."""
+    def __init__(self, max_depth, eval_fn):
+        """Initialize the agent."""
+        Agent.__init__(self)
+        self.max_depth = max_depth
+        self.eval_fn = eval_fn
+
+    def select_move(self, game_state):
+        """Select a move based on Alpha/Beta Minimax."""
+        best_moves = []
+        best_score = None
+        best_black = MIN_SCORE
+        best_white = MAX_SCORE
+
+        # Loop through all legal moves
+        for possible_move in game_state.legal_moves():
+            next_state = game-state.apply_move(possible_move)
+            opponent_best_outcome = alpha_beta_result(
+                next_state, self.max_depth, best_black, best_white, self.eval_fn)
+
+            our_best_outcome = -1 * opponent_best_outcome
+            if (not best_moves) or our_best_outcome > best_score:
+                # best move so far
+                best_moves = [possible_move]
+                best_score = our_best_outcome
+                if game_state.next_player == Player.black:
+                    best_black = best_score
+                elif game_state.next_player == Player.white:
+                    best_white = best_score
+            elif our_best_outcome == best_score:
+                # as good as previous best move
+                best_moves.append(possible_move)
+
+        # Choose random move from best moves
+        return random.choice(best_moves)
