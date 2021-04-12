@@ -50,3 +50,37 @@ class MCTSNode(object):
     def winning_frac(self, player):
         """Return the win rate of a position."""
         return float(self.win_counts[player]) / float(self.num_rollouts)
+
+class MCTSAgent(agent.Agent):
+    """Class for Monte Carlo Search Tree Agent."""
+    def select_move(self, game_state):
+        """Select next move."""
+        root = MCTSNode(game_state)
+
+        for i in range(self.num_rounds):
+            node = root
+
+            while (not node.can_add_child()) and (not node.is_terminal()):
+                node = self.select_child(node)
+
+                # Add new child node to tree
+                if node.can_add_child():
+                    node = node.add_random_child()
+
+                # simulate a random game
+                winner = self.simulate_random_game(node.game_state)
+
+                while node is not None:
+                    # propogate score back up tree
+                    node.record_win(winner)
+
+        # select best move
+        best_move = None
+        best_pct = -1.0
+        for child in root.children:
+            child_pct = child.winning_frac(game_state.next_player)
+            if child_pct > best_pct:
+                best_pct = child_pct
+                best_move = child.move
+
+        return best_move
