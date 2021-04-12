@@ -33,3 +33,8 @@ class MCTSNode(object):
         new_node = MCTSNode(new_game_state, self, new_move)
         self.children.append(new_node)
         return new_node
+
+    def record_win(self, winner):
+        """Increment the win counter for position."""
+        self.win_counts[winner] += 1
+        self.num_rollouts += 1
