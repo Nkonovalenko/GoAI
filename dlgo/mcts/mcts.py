@@ -1,3 +1,14 @@
+import random
+import math
+
+from dlgo import agent
+from dlgo.gotypes import Player
+from dlgo.utils import coords_from_point
+
+__all__ = [
+    'MCTSAgent'
+]
+
 class MCTSNode(object):
     """Class to create Monte Carlo Tree Search Nodes."""
     
@@ -14,3 +25,11 @@ class MCTSNode(object):
         self.children = []
         self.unvisited_moves = game_state.legal_moves()
 
+    def add_random_child(self):
+        """Add a random child node."""
+        index = random.randint(0, len(self.unvisited_moves) - 1)
+        new_move = self.unvisited_moves.pop(index)
+        new_game_state = self.game_state.apply_move(new_move)
+        new_node = MCTSNode(new_game_state, self, new_move)
+        self.children.append(new_node)
+        return new_node
