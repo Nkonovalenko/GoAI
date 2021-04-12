@@ -38,3 +38,7 @@ class MCTSNode(object):
         """Increment the win counter for position."""
         self.win_counts[winner] += 1
         self.num_rollouts += 1
+
+    def can_add_child(self):
+        """Check if any moves can still be made."""
+        return len(self.unvisited_moves) > 0
