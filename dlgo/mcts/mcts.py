@@ -46,3 +46,7 @@ class MCTSNode(object):
     def is_terminal(self):
         """Check is game is over."""
         return self.game_state.is_over()
+
+    def winning_frac(self, player):
+        """Return the win rate of a position."""
+        return float(self.win_counts[player]) / float(self.num_rollouts)
