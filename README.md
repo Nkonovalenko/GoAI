@@ -40,7 +40,8 @@ This AI will be written in Python, and in later stages of the project will be de
 - Alpha Beta Pruning keeps track of the best outcome for white (Alpha), and black (Beta)
 - If a branch better than Alpha for white, or Beta for black appears, we will continue analysing it
 - If a branch worse than Alpha for white, or Beta for black appears, we don't need to look further
-- This means we only consider branches AT LEAST as good as the best so far, allowing us to prune worse branches  
+- This means we only consider branches AT LEAST as good as the best so far, allowing us to prune worse branches
+- For the first move, this agent took just under 4 minutes, which is still nt nrealy as efficient as what we want.
 
 ## Minimax with Depth Pruning
 - This algorithm attempts to minimize the pain in a max loss scenario
