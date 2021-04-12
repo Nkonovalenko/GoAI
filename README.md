@@ -22,3 +22,41 @@ This AI will be written in Python, and in later stages of the project will be de
 - Naive algorithms are very fast, but do not produce results
 - Minimax produces results, but is far too slow to be able to train and use easily
 - Thus, optimization is a very important aspect of Artificial Intelligence
+
+# Currently Implemented Algorithms Explained 
+## Monte Carlo Tree Search
+- Monte Carlo algorithms use randomness to analyze complex positions
+- Our Minimax Algorithms evaluate positions with a simplistic heuristic that won't do well against experienced players
+- MCTS allows for an evaluation of positions without strategic knowledge through using random simulations
+- From any given position, it will build a tree and evaluate how many times each color wins, choosing the move that results in the most wins
+- Each iteration of the MCTS has three steps:
+   1) Add new position to tree
+   2) Simulate random game from that position
+   3) Update tree statistics with results of that game
+ 
+## Minimax with Alpha Beta Pruning
+- This algorithm attempts to minimize the pain in a max loss scenario
+- As seen below, Minimax with Depth Pruning is incredibly slow still
+- Alpha Beta Pruning keeps track of the best outcome for white (Alpha), and black (Beta)
+- If a branch better than Alpha for white, or Beta for black appears, we will continue analysing it
+- If a branch worse than Alpha for white, or Beta for black appears, we don't need to look further
+- This means we only consider branches AT LEAST as good as the best so far, allowing us to prune worse branches  
+
+## Minimax with Depth Pruning
+- This algorithm attempts to minimize the pain in a max loss scenario
+- It contains the strengths of Minimax, while improving on the weakness of speed
+- It drastically improves the runtime by pruning branches beyond a pre-specified depth
+- While testing this on a 5x5 board, after my first move, the algorithm had 26 possible moves
+- To compute the best move to a depth of 3 moves, it took 4 minutes
+- While it is much faster than Minimax, 4 minutes for a depth of 3 is not nearly as efficient as what we want
+
+## Minimax
+- This algorithm attempts to minimize the pain in a max loss scenario
+- It attempts to find the best move for itself, then the best move for the bot, and keeps alternating
+- A big strength is that theoretically it is impossible for this algorithm to lose
+- A big weakness is that this algorithm is extremely slow as it constructs an extremely large tree
+
+## Naive Algorithm
+- This algorithm is based on preserving the bot's own "eyes"
+- It loops through every single possible move, and checks whether it is legal and preserves the "eyes"
+- If so, it is then appended to a list of legal moves, which the AI then chooses one at random
