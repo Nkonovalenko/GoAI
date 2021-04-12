@@ -11,12 +11,16 @@ This AI will be written in Python, and in later stages of the project will be de
 - Zobrist Hashing which stores the GameStates as hashes, making goboard.py more efficient than goboard_slow.py.
 - Minimax Agent which creates a list of every legal move, and then uses finds the best possible scenario
 - Depth Pruned Minimax Agent which is more efficient than Minimax agent. It uses an evaluation function to prune the total number of branches.
+- Minimax Agent that implements Alpha-Beta pruning to reduce search width
+- MCTS Agent that will simulate games randomly
 
 # Current Goals for Implementation:
-- Minimax Agent that implements Alpha-Beta pruning to reduce search width
+- Optimize my RandomBot so that it can be used for easily for the MCTS simulations
+- Optimize my goboard
 - Non-Naive Agent which will use a Convolutional Neural Network
 - Developing a front-end for the GoAI
 - Deploying the GoAI to AWS so that it can compete online
+
 
 # Lessons Learned Thus Far
 - Naive algorithms are very fast, but do not produce results
