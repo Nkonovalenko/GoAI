@@ -26,10 +26,29 @@ def alpha_beta_result(game_state, max_depth, best_black, best_white, eval_fn):
         else:
             return MIN_SCORE
 
-        # Reached max depth, use heuristic to check how good sequence is
-        if max_depth == 0:
-            return eval_fn(game_state)
+    # Reached max depth, use heuristic to check how good sequence is
+    if max_depth == 0:
+        return eval_fn(game_state)
 
-        best_so_far = MIN_SCORE
-        for candidate_move in game_state.legal_moves():
-            next_state = game_state.apply_move(candidate_move)
+    best_so_far = MIN_SCORE
+    for candidate_move in game_state.legal_moves():
+        next_state = game_state.apply_move(candidate_move)
+        opponent_best_result = alpha_beta_result(
+            next_state, max_depth - 1, best_black, best_white, eval_fn)
+        our_result = -1 *  opponent_best_result
+        if our_result > best_so_far:
+            best_so_far = our_result
+
+        # Update benchmark for white
+        if game_state.next_player == Player.white:
+            if best_so_far > best_white:
+                outcome_for_black = -1 * best_so_far
+                if outcome_for_black < best_black
+                    return best_so_far
+        # Update benchmark for black
+        elif game_state.next_player == Player.black:
+            if best_so_far > best_black:
+                outcome_for_white = -1 * best_so_far
+                if outcome_for_white < best_white:
+                    return best_so_far
+    return best_so_far
