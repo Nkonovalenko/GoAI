@@ -42,3 +42,7 @@ class MCTSNode(object):
     def can_add_child(self):
         """Check if any moves can still be made."""
         return len(self.unvisited_moves) > 0
+
+    def is_terminal(self):
+        """Check is game is over."""
+        return self.game_state.is_over()
