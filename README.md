@@ -37,6 +37,7 @@ This AI will be written in Python, and in later stages of the project will be de
    1) Add new position to tree
    2) Simulate random game from that position
    3) Update tree statistics with results of that game
+- MCTSAgent is faster than the previous algorithm, taking just under 3 minutes for the first move
  
 ## Minimax with Alpha Beta Pruning
 - This algorithm attempts to minimize the pain in a max loss scenario
@@ -45,7 +46,7 @@ This AI will be written in Python, and in later stages of the project will be de
 - If a branch better than Alpha for white, or Beta for black appears, we will continue analysing it
 - If a branch worse than Alpha for white, or Beta for black appears, we don't need to look further
 - This means we only consider branches AT LEAST as good as the best so far, allowing us to prune worse branches
-- For the first move, this agent took just under 4 minutes, which is still nt nrealy as efficient as what we want.
+- For the first move, this agent took just under 4 minutes, which is still not really as efficient as what we want.
 
 ## Minimax with Depth Pruning
 - This algorithm attempts to minimize the pain in a max loss scenario
