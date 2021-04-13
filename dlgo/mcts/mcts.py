@@ -65,20 +65,20 @@ class MCTSAgent(agent.Agent):
 
         for i in range(self.num_rounds):
             node = root
-
             while (not node.can_add_child()) and (not node.is_terminal()):
                 node = self.select_child(node)
 
-                # Add new child node to tree
-                if node.can_add_child():
-                    node = node.add_random_child()
+            # Add new child node to tree
+            if node.can_add_child():
+                node = node.add_random_child()
 
-                # simulate a random game
-                winner = self.simulate_random_game(node.game_state)
+            # simulate a random game
+            winner = self.simulate_random_game(node.game_state)
 
-                while node is not None:
-                    # propogate score back up tree
-                    node.record_win(winner)
+            while node is not None:
+                # propogate score back up tree
+                node.record_win(winner)
+                node = node.parent
 
         # select best move
         best_move = None
@@ -93,7 +93,7 @@ class MCTSAgent(agent.Agent):
 
     def select_child(self, node):
         """Select a child using the upper confidence bound for trees (UCT)."""
-        total_rollouts = sum(cihld.num_rollouts for child in node.children)
+        total_rollouts = sum(child.num_rollouts for child in node.children)
         log_rollouts = math.log(total_rollouts)
 
         best_score = -1
