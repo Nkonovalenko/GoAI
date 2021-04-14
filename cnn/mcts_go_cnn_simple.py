@@ -33,3 +33,13 @@ model.add(Dense(128, activation='sigmoid'))
 model.add(Dense(size * size, activation='sigmoid'))
 model.summary()
 
+model.compile(loss='mean_squared_error',
+              optimizer='sgd',
+              metrics=['accuracy'])
+
+model.fit(X_train, Y_train,
+          batch_size=64,
+          epochs=5,
+          verbose=1,
+          validation_data=(X_test, Y_test))
+
