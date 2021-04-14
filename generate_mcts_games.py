@@ -21,8 +21,7 @@ def generate_game(board_size, rounds, max_moves, temperature):
         print_board(game.board)
         move = bot.select_move(game)
         if move.is_play:
-            board.append(encoder.encode(game))
-
+            boards.append(encoder.encode(game))
             move_one_hot = np.zeros(encoder.num_points())
             move_one_hot[encoder.encode_point(move.point)] = 1
             moves.append(move_one_hot)
