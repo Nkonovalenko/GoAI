@@ -19,3 +19,9 @@ train_samples = 10000
 X_train, X_test = X[:train_samples], X[train_samples:]
 Y_train, Y_test = Y[:train_samples], Y[train_samples:]
 
+model = Sequential()
+model.add(Conv2D(filters=32,
+                 kernel_size=(3, 3),
+                 activation='sigmoid',
+                 input_shape=input_shape))
+
