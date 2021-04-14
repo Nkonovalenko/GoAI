@@ -25,3 +25,7 @@ model.add(Conv2D(filters=32,
                  activation='sigmoid',
                  input_shape=input_shape))
 
+model.add(Conv2D(64, (3, 3), activation='sigmoid'))
+
+model.add(Flatten())
+
