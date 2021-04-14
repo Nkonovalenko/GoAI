@@ -29,3 +29,7 @@ model.add(Conv2D(64, (3, 3), activation='sigmoid'))
 
 model.add(Flatten())
 
+model.add(Dense(128, activation='sigmoid'))
+model.add(Dense(size * size, activation='sigmoid'))
+model.summary()
+
