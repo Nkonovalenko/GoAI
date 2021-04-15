@@ -30,8 +30,9 @@ This AI will be written in Python, and in later stages of the project will be de
 
 # Currently Implemented Algorithms Explained
 ## Convolutional Neural Network (coming soon)
+- This model type will likely be better than Perceptron, as it is built to analyze spatial relationships
 
-## Multilayer Perceptron (coming soon)
+## Multilayer Perceptron
 - This is the first machien learning algorithm I'll be implementing
 - It takes in a set of data, splits it into train/test, and converts the 9x9 input into size 81 vectors
 - This model will have 3 dense layers, with 81 output classes
