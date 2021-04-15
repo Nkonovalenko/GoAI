@@ -32,6 +32,8 @@ This AI will be written in Python, and in later stages of the project will be de
 ## Convolutional Neural Network (coming soon)
 - This model type will likely be better than Perceptron, as it is built to analyze spatial relationships
 - Using Cross Entropy Loss which is much better for classification problems
+- After training for 100 epochs, we have an accuracy of 7.57% which is 3.35x better than the Multilayer Perceptron
+- After training for 500 epochs, we have an accuracy of 19.69%, which is 8.73x better than the Multilayer Perceptron
 
 ## Multilayer Perceptron
 - This is the first machien learning algorithm I'll be implementing
