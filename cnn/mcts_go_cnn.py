@@ -27,3 +27,11 @@ model.add(Dense(128, activation='relu'))
 model.add(Dropout(rate=0.6))
 model.add(Dense(size * size, activation='softmax'))
 model.summary()
+
+model.compile(loss='categorical_crossentropy', optimizer='sgd', metrics=['accuracy'])
+
+model.fit(X_train, Y_train, batch_size=64, epochs=5, 
+            verbose=1, validation_data=(X_test, Y_test))
+score = model.evaluate(X_test, Y_test, verbose=0)
+print('Test loss:', score[0])
+print('Test accuracy:', score[1])
