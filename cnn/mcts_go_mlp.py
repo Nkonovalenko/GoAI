@@ -16,4 +16,11 @@ Y = Y.reshape(samples, board_size)
 # Train on 90% of data, test on 10%
 train_samples = int(0.8 * samples)
 X_train, X_test = X[:train_samples], X[train_samples:]
-Y_train, Y_test = Y[:train_samples], Y[train_samples:] 
+Y_train, Y_test = Y[:train_samples], Y[train_samples:]
+
+model = Sequential()
+model.add(Dense(1000, activation='sigmoid', input_shape=(board_size,)))
+model.add(Dense(500, activation='sigmoid'))
+model.add(Dense(board_size, activation='sigmoid'))
+model.summary()
+ 
