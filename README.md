@@ -31,6 +31,7 @@ This AI will be written in Python, and in later stages of the project will be de
 # Currently Implemented Algorithms Explained
 ## Convolutional Neural Network (coming soon)
 - This model type will likely be better than Perceptron, as it is built to analyze spatial relationships
+- Using Cross Entropy Loss which is much better for classification problems
 
 ## Multilayer Perceptron
 - This is the first machien learning algorithm I'll be implementing
@@ -38,6 +39,7 @@ This AI will be written in Python, and in later stages of the project will be de
 - This model will have 3 dense layers, with 81 output classes
 - Out Perceptron algorithm doesn't understand the rules, and ocassionally recommends unavailable moves
 - It prefers moves played at the center of the board as opposed to the edges
+- Used Mean Square Error for loss, which is better for regression problems (not the best choice for this task)
 - After training 363,000 boards we get a test accuracy of 2.256%, for perspective randomly guessing results in 1.23%.
 - Flattening the input results in information being lost, thus Perceptron is not the best model architecture for Go. 
 
