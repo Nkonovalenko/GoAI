@@ -17,7 +17,8 @@ This AI will be written in Python, and in later stages of the project will be de
 # Current Goals for Implementation:
 - Optimize my RandomBot so that it can be used for easily for the MCTS simulations
 - Optimize my goboard
-- Non-Naive Agent which will use a Convolutional Neural Network
+- Agent which will use multilayer perceptron
+- Agent which will use a Convolutional Neural Network
 - Developing a front-end for the GoAI
 - Deploying the GoAI to AWS so that it can compete online
 
@@ -27,7 +28,14 @@ This AI will be written in Python, and in later stages of the project will be de
 - Minimax produces results, but is far too slow to be able to train and use easily
 - Thus, optimization is a very important aspect of Artificial Intelligence
 
-# Currently Implemented Algorithms Explained 
+# Currently Implemented Algorithms Explained
+## Convolutional Neural Network (coming soon)
+
+## Multilayer Perceptron (coming soon)
+- This is the first machien learning algorithm I'll be implementing
+- It takes in a set of data, splits it into train/test, and converts the 9x9 input into size 81 vectors
+- This model will have 3 dense layers, with 81 output classes
+
 ## Monte Carlo Tree Search
 - Monte Carlo algorithms use randomness to analyze complex positions
 - Our Minimax Algorithms evaluate positions with a simplistic heuristic that won't do well against experienced players
