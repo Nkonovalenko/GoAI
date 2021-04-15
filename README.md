@@ -35,6 +35,9 @@ This AI will be written in Python, and in later stages of the project will be de
 - This is the first machien learning algorithm I'll be implementing
 - It takes in a set of data, splits it into train/test, and converts the 9x9 input into size 81 vectors
 - This model will have 3 dense layers, with 81 output classes
+- Out Perceptron algorithm doesn't understand the rules, and ocassionally recommends unavailable moves
+- It prefers moves played at the center of the board as opposed to the edges
+- Flattening the input results in information being lost, thus Perceptron is not the best model architecture for Go. 
 
 ## Monte Carlo Tree Search
 - Monte Carlo algorithms use randomness to analyze complex positions
