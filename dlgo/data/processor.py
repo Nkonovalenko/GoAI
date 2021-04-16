@@ -36,7 +36,7 @@ class GoDataProcessor:
                 indices_by_zip_name[filename] = []
             indices_by_zip_name[filename].append(index)
         for zip_name in zip_names:
-            base_name = zip_names.replace('.tar.gz', '')
+            base_name = zip_name.replace('.tar.gz', '')
             data_file_name = base_name + data_type
             if not os.path.isfile(self.data_dir + '/' + data_file_name):
                 self.process_zip(zip_name, data_file_name, indices_by_zip_name[zip_name])
@@ -116,7 +116,7 @@ class GoDataProcessor:
             file_name = zip_file_name.replace('.tar.gz', '') + data_type
             file_names.append(file_name)
 
-        features_list = []
+        feature_list = []
         label_list = []
         for file_name in file_names:
             file_prefix = file_name.replace('.tar.gz', '')
