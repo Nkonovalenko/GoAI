@@ -28,7 +28,7 @@ class OnePlaneEncoder(Encoder):
                 if go_string.color == next_player:
                     board_matrix[0, r, c] = 1
                 else:
-                    board_matrx[0, r, c] = -1
+                    board_matrix[0, r, c] = -1
         return board_matrix
 
     def encode_point(self, point):
