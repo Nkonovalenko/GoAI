@@ -1,10 +1,7 @@
 # A .gitignore file will tell git which files and directories to ignore and
 # not add to version control.
 
-submit.tar.gz
-submit.tar.xz
-starter_files.tar.gz
-starter_files.tar.xz
+*.tar.gz
 
 # Python
 *.pyc
