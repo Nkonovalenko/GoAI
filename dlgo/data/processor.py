@@ -61,9 +61,43 @@ class GoDataProcessor:
         name_list = zip_file.getnames()
         total_examples = self.num_total_examples(zip_file, game_list, name_list)
 
+        # Infer the shape of features and labels from the encoder we use
+        shape = self.encoder.shape()
+        feature_shape = np.insert(shape, 0, np.asarray([total_examples]))
+        features = np.zeros(feature_shape)
+        labels = np.zeros((total_examples,))
+
+        counter = 0
+        for index in game_list:
+            name = name_list[index + 1]
+            if not name.endswith('.sgf'):
+                raise ValueError(name + ' is not a valid sgf')
+            # Read SGF contents as string after zip extraction
+            sgf_content = zip_file.extractfile(name).read()
+            sgf = Sgf_game.from_string(sgf_content)
+
+            game_state, first_move_done = self.get_handicap(sgf)
+
+            for item in sgf.main_sequence_iter():
+                color, move_tuple = item.get_move()
+                point = None
+                if color is not None:
+                    if move_tuple is not None:
+                        row, col = move_tuple
+                        point = Point(row + 1, col + 1)
+                        move = Move.play(point)
+                    else:
+                        move = Move.pass_turn()
+                    if first_move_done and point is not None:
+                        features[counter] = self.encoder.encode(game_state)
+                        labels[counter] = self.encoder.encode_point(point)
+                        counter += 1
+                    game_state = game_state.apply_move(move)
+                    first_move_done = True
+
     @staticmethod
     def get_handicap(sgf):
-        """Return handicap for first move."""
+        """Return handicap stones for current game and apply to empty board."""
         go_board = Board(19, 19)
         first_move_done = False
         move = None
@@ -78,6 +112,7 @@ class GoDataProcessor:
         return game_state, first_move_done
 
     def num_total_examples(self, zip_file, game_list, name_list):
+        """Precompute number of moves available per zip file."""
         total_examples = 0
         for index in game_list:
             name = name_list[index + 1]
