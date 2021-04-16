@@ -43,3 +43,17 @@ class GoDataProcessor:
 
         features_and_labels = self.consolidate_games(data_type, data)
         return features_and_labels
+
+    def unzip_data(self, zip_file_name):
+        """Unzip file."""
+        this_gz = gzip.open(self.data_dir + '/' + zip_file_name)
+
+        tar_file = zip_file_name[0:-3]
+        this_tar = open(self.data_dir + '/' + tar_file, 'wb')
+
+        shutil.copyfileobj(this_gz, this_tar)
+        this_tar.close()
+        return tar_file
+
+    def process_zip(self, zip_file_name, data_file_name, game_list):
+        tar_file = self.unzip_data(zip_file_name)
