@@ -61,6 +61,22 @@ class GoDataProcessor:
         name_list = zip_file.getnames()
         total_examples = self.num_total_examples(zip_file, game_list, name_list)
 
+    @staticmethod
+    def get_handicap(sgf):
+        """Return handicap for first move."""
+        go_board = Board(19, 19)
+        first_move_done = False
+        move = None
+        game_state = GameState.new_game(19)
+        if sgf.get_handicap() is not None and sgf.get_handicap() != 0:
+            for setup in sgf.get_root().get_setup_stones():
+                for move in setup:
+                    row, col = move
+                    go_board.place_stone(Player.black, Point(row + 1, col + 1))
+            first_move_done = True
+            game_state = GameState(go_board, Player.white, None, move)
+        return game_state, first_move_done
+
     def num_total_examples(self, zip_file, game_list, name_list):
         total_examples = 0
         for index in game_list:
