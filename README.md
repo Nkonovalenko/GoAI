@@ -26,7 +26,10 @@ This AI will be written in Python, and in later stages of the project will be de
 # Lessons Learned Thus Far
 - Naive algorithms are very fast, but do not produce results
 - Minimax produces results, but is far too slow to be able to train and use easily
-- Thus, optimization is a very important aspect of Artificial Intelligence
+- Thus, optimization is a very important aspect of Artificial Intelligence\
+- My neural networks thus far have been trained on games I generated using MCTS agents
+- This essentially means the moves it trains on are nearly random, and a 20% validation accuracy will not perform well against strong players
+- For this reason I have to find a data source of Go games from strong players to train on, in order to "learn" the strategies of the game
 
 # Currently Implemented Algorithms Explained
 ## Convolutional Neural Network (coming soon)
