@@ -9,6 +9,7 @@ else:
     from urllib import urlopen, urlretrieve
 
 
+
 class KGSIndex:
 
     def __init__(self,
@@ -29,3 +30,27 @@ class KGSIndex:
         self.urls = []
         self.load_index()  # Load index on creation
 
+    def download_files(self):
+        """Download zip files by distributing work on all available CPUs"""
+        if not os.path.isdir(self.data_directory):
+            os.makedirs(self.data_directory)
+
+        urls_to_download = []
+        for file_info in self.file_info:
+            url = file_info['url']
+            file_name = file_info['filename']
+            if not os.path.isfile(self.data_directory + '/' + file_name):
+                urls_to_download.append((url, self.data_directory + '/' + file_name))
+        cores = multiprocessing.cpu_count()
+        pool = multiprocessing.Pool(processes=cores)
+        try:
+            it = pool.imap(worker, urls_to_download)
+            for _ in it:
+                pass
+            pool.close()
+            pool.join()
+        except KeyboardInterrupt:
+            print(">>> Caught KeyboardInterrupt, terminating workers")
+            pool.terminate()
+            pool.join()
+            sys.exit(-1)
