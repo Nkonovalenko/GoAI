@@ -2,6 +2,10 @@
 # not add to version control.
 
 *.tar.gz
+*.tar
+*.gz
+*.zip
+*.npy
 
 # Python
 *.pyc
