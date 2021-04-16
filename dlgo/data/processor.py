@@ -14,7 +14,7 @@ from dlgo.encoders.base import get_encoder_by_name
 
 ## Sampler will be used to sample training and test data from files
 from dlgo.data.index_processor import KGSIndex
-from dlgo.data.sampling import Sample
+from dlgo.data.sampling import Sampler
 
 class GoDataProcessor:
     def __init__(self, encoder='oneplane', data_directory='data'):
@@ -108,6 +108,34 @@ class GoDataProcessor:
             current_labels, labels = labels[:chunksize], labels[chunksize:]
             np.save(feature_file, current_features)
             np.save(label_file, current_labels)
+
+    def consolidate_games(self, data_type, samples):
+        files_needed = set(file_name for file_name, index in samples)
+        file_names = []
+        for zip_file_name in files_needed:
+            file_name = zip_file_name.replace('.tar.gz', '') + data_type
+            file_names.append(file_name)
+
+        features_list = []
+        label_list = []
+        for file_name in file_names:
+            file_prefix = file_name.replace('.tar.gz', '')
+            base = self.data_dir + '/' + file_prefix + '_features_*.npy'
+            for feature_file in glob.glob(base):
+                label_file = feature_file.replace('features', 'labels')
+                x = np.load(feature_file)
+                y = np.load(label_file)
+                x = x.astype('float32')
+                y = to_categorical(y.astype(int), 19*19)
+                feature_list.append(x)
+                label_list.append(y)
+
+        features = np.concatenate(feature_list, axis=0)
+        labels = np.concatenate(label_list, axis=0)
+        np.save('{}/features_{}.npy'.format(self.data_dir, data_type), features)
+        np.save('{}/labels_{}.npy'.format(self.data_dir, data_type), labels)
+
+        return features, labels
 
     @staticmethod
     def get_handicap(sgf):
