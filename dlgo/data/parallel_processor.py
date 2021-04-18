@@ -19,3 +19,12 @@ from dlgo.data.sampling import Sampler
 from dlgo.data.generator import DataGenerator
 from dlgo.encoders.base import get_encoder_by_name
 
+
+def worker(jobinfo):
+    try:
+        clazz, encoder, zip_file, data_file_name, game_list = jobinfo
+        clazz(encoder=encoder).process_zip(zip_file, data_file_name, game_list)
+    except (KeyboardInterrupt, SystemExit):
+        raise Exception('>>> Exiting child process.')
+
+
