@@ -51,4 +51,19 @@ class GoDataProcessor:
             features_and_labels = self.consolidate_games(data_type, data)
             return features_and_labels  # <3>
 
+# <1> Map workload to CPUs
+# <2> Either return a Go data generator...
+# <3> ... or return consolidated data as before.
+# end::load_generator[]
+
+    def unzip_data(self, zip_file_name):
+        this_gz = gzip.open(self.data_dir + '/' + zip_file_name)
+
+        tar_file = zip_file_name[0:-3]
+        this_tar = open(self.data_dir + '/' + tar_file, 'wb')
+
+        shutil.copyfileobj(this_gz, this_tar)
+        this_tar.close()
+        return tar_file
+
 
