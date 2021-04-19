@@ -23,4 +23,7 @@ test_generator = processor.load_go_data('test', num_games, use_generator=True)
 # Define neural network
 input_shape = (encoder.num_planes, go_board_rows, go_board_cols)
 network_layers = small.layers(input_shape)
-model = Sequential 
+model = Sequential
+for layer in network_layers:
+    model.add(layer)
+model.add(Dense(num_classes, activation='softmax')) 
