@@ -35,4 +35,6 @@ batch_size = 128
 model.fit_generator(generator=generator.generate(batch_size, num_classes), epochs=epochs,
                     steps_per_epoch=generator.get_num_samples()/batch_size,
                     callbacks=[ModelCheckpoint('../checkpoints/small_model_epoch{epoch}.h5')])
-                     
+model.evaluate_generator(
+    generator=test_generator.generate(batch_size, num_classes),
+    steps=test_generator.get_num_samples() / batch_size) 
