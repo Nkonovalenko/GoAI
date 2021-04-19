@@ -4,6 +4,8 @@ This past academic year I completed Machine Learning and Computer Vision courses
 
 This AI will be written in Python, and in later stages of the project will be deployed to AWS so that I can test it against other players and AI's.
 
+I'm very excited with how the AI has been improving thus far in my journey. At first the AI played only random moves, but I believe that I am close to completing a neural network that trains on high level player games.
+
 # Currently Implemented:
 - Classes to handle the GameState, Game, Board, Player, Move, Point
 - Checking superko is done through storing every GameState and iterating through them for each move (very inefficient, goboard_slow.py)
@@ -32,6 +34,7 @@ This AI will be written in Python, and in later stages of the project will be de
 - My neural networks thus far have been trained on games I generated using MCTS agents
 - This essentially means the moves it trains on are nearly random, and a 20% validation accuracy will not perform well against strong players
 - For this reason I have to find a data source of Go games from strong players to train on, in order to "learn" the strategies of the game
+- A neural network's accuracy is limited by the quality of the data that it trains on.
 
 # Currently Implemented Algorithms Explained
 ## Convolutional Neural Network (coming soon)
