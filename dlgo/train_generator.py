@@ -26,4 +26,7 @@ network_layers = small.layers(input_shape)
 model = Sequential
 for layer in network_layers:
     model.add(layer)
-model.add(Dense(num_classes, activation='softmax')) 
+model.add(Dense(num_classes, activation='softmax'))
+model.compile(loss='categorical_crossentropy', optimizer='sgd', metrics=['acccuracy'])
+
+ 
