@@ -18,4 +18,9 @@ processor = GoDataProcessor(encoder=encoder.name())
 
 # Create 2 generators, 1 for training, 1 for testing
 generator = processor.load_go_data('train', num_games, use_generator=True)
-test_generator = processor.load_go_data('test', num_games, use_generator=True) 
+test_generator = processor.load_go_data('test', num_games, use_generator=True)
+
+# Define neural network
+input_shape = (encoder.num_planes, go_board_rows, go_board_cols)
+network_layers = small.layers(input_shape)
+model = Sequential 
