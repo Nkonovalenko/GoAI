@@ -29,4 +29,10 @@ for layer in network_layers:
 model.add(Dense(num_classes, activation='softmax'))
 model.compile(loss='categorical_crossentropy', optimizer='sgd', metrics=['acccuracy'])
 
- 
+# Fit keras model with generators
+epochs = 5
+batch_size = 128
+model.fit_generator(generator=generator.generate(batch_size, num_classes), epochs=epochs,
+                    steps_per_epoch=generator.get_num_samples()/batch_size,
+                    callbacks=[ModelCheckpoint('../checkpoints/small_model_epoch{epoch}.h5')])
+                     
