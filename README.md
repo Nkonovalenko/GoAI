@@ -60,7 +60,7 @@ I'm very excited with how the AI has been improving thus far in my journey. At f
 
 
 ## Multilayer Perceptron
-- This is the first machien learning algorithm I'll be implementing
+- This is the first machine learning algorithm I'll be implementing
 - It takes in a set of data, splits it into train/test, and converts the 9x9 input into size 81 vectors
 - This model will have 3 dense layers, with 81 output classes
 - Out Perceptron algorithm doesn't understand the rules, and ocassionally recommends unavailable moves
