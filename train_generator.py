@@ -1,4 +1,4 @@
-from dlgo.data.processor import GoDataProcessor
+from dlgo.data.parallel_processor import GoDataProcessor
 from dlgo.encoders.oneplane import OnePlaneEncoder
 
 from dlgo.networks import small
@@ -35,7 +35,7 @@ model.add(Dense(num_classes, activation='softmax'))
 model.compile(loss='categorical_crossentropy', optimizer='sgd', metrics=['accuracy'])
 
 # Fit keras model with generators
-epochs = 5
+epochs = 180
 batch_size = 128
 print("Training neural network...")
 model.fit(x=generator.generate(batch_size, num_classes), epochs=epochs,
