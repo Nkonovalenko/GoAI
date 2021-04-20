@@ -15,16 +15,15 @@ I'm very excited with how the AI has been improving thus far in my journey. At f
 - Depth Pruned Minimax Agent which is more efficient than Minimax agent. It uses an evaluation function to prune the total number of branches.
 - Minimax Agent that implements Alpha-Beta pruning to reduce search width
 - MCTS Agent that will simulate games randomly
+- Agent which uses multilayer perceptron
+- Agent which uses a convolutional neural network
 - Downloading Go data from the KGSIndex which has high level games that will be better training data than random MCTS training data
 - A DataProcessor class that is able to unzip contents of the downloaded data, and encode it
 
 # Current Goals for Implementation:
-- Optimize my RandomBot so that it can be used for easily for the MCTS simulations
-- Optimize my goboard
-- Agent which will use multilayer perceptron
-- Agent which will use a Convolutional Neural Network
 - Developing a front-end for the GoAI
 - Deploying the GoAI to AWS so that it can compete online
+- Training GoAI on AWS or GoogleColab with TensorFlow GPU acceleration
 
 
 # Lessons Learned Thus Far
