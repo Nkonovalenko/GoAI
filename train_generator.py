@@ -20,7 +20,7 @@ processor = GoDataProcessor(encoder=encoder.name())
 
 # Create 2 generators, 1 for training, 1 for testing
 print("Creating train generator...")
-generator = processor.load_go_data('train', num_games, use_generator=True)
+generator = processor.load_go_data('train', num_samples=num_games,use_generator=True)
 print("Creating test generator...")
 test_generator = processor.load_go_data('test', num_games, use_generator=True)
 
@@ -35,13 +35,17 @@ model.add(Dense(num_classes, activation='softmax'))
 model.compile(loss='categorical_crossentropy', optimizer='sgd', metrics=['accuracy'])
 
 # Fit keras model with generators
-epochs = 180
+epochs = 1000
 batch_size = 128
 print("Training neural network...")
+samp = generator.get_num_samples()
+print("Num samples: ", samp)
+print("Batch size: ", batch_size)
+print("Steps: ", samp/batch_size)
 model.fit(x=generator.generate(batch_size, num_classes), epochs=epochs,
                     steps_per_epoch=generator.get_num_samples()/batch_size,
                     validation_steps=test_generator.get_num_samples()/batch_size,
-                    callbacks=[ModelCheckpoint('checkpoints/small_model_epoch_{epoch}.h5')])
+                   callbacks=[ModelCheckpoint('checkpoints/small_model_epoch_{epoch}.h5')])
 print("Evaluating neural network...")
 model.evaluate(
     x=test_generator.generate(batch_size, num_classes),
