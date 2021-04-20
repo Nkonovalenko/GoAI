@@ -12,11 +12,11 @@ class DataGenerator:
     def get_num_samples(self, batch_size=128, num_classes=19*19):
         if self.num_samples is not None:
             return self.num_samples
-
-        self.num_samples = 0
-        for X, y in self._generate(batch_size=batch_size, num_classes=num_classes):
-            self.num_samples += X.shape[0]
-        return self.num_samples
+        else:
+            self.num_samples = 0
+            for X, y in self._generate(batch_size=batch_size, num_classes=num_classes):
+                self.num_samples += X.shape[0]
+            return self.num_samples
 
     def _generate(self, batch_size, num_classes):
         for zip_file_name in self.files:
