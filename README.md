@@ -35,13 +35,30 @@ I'm very excited with how the AI has been improving thus far in my journey. At f
 - This essentially means the moves it trains on are nearly random, and a 20% validation accuracy will not perform well against strong players
 - For this reason I have to find a data source of Go games from strong players to train on, in order to "learn" the strategies of the game
 - A neural network's accuracy is limited by the quality of the data that it trains on.
+- TensorFlow with GPU acceleration would greatly speed up training speed, I'll be looking into AWS or Google Colab.
 
 # Currently Implemented Algorithms Explained
-## Convolutional Neural Network (coming soon)
+## Convolutional Neural Network (Trained on high level games)
+- I have create several classes for Data importing, processing, and encoding that allow me to download high level games.
+- I then am able to choose the number of games I want to train on, out of over 17,000 available games.
+- The network layers are in networks/small.py, I use Conv2D with MaxPooling and ReLU activation.
+- It uses cross entropy loss with the stochastic gradient descent optimizer. It might be possible to speed up results with AdaGrad.
+- With 100 games and a batch size of 128, our model has 88 steps per epoch.
+   1) After 100 epochs: 0.42% accuracy
+   2) After 250 epochs: 2.81% accuracy
+   3) After 500 epochs: 33.34% accuracy
+   4) After 750 epochs: 90.64% accuracy
+   5) Highest accuracy reached epoch 965: 98.7%
+- One thing to keep in mind for the above results, the network trained on an incredibly small number of games
+- In order for this AI to reach a level where it plays better, it much be trained on preferably 10,000 games.
+- My laptop does not support TensorFlow GPU acceleration, thus I must find a way to train either on Google Colab or AWS.
+
+## Convolutional Neural Network (Trained on randomly generated moves)
 - This model type will likely be better than Perceptron, as it is built to analyze spatial relationships
 - Using Cross Entropy Loss which is much better for classification problems
 - After training for 100 epochs, we have an accuracy of 7.57% which is 3.35x better than the Multilayer Perceptron
 - After training for 500 epochs, we have an accuracy of 19.69%, which is 8.73x better than the Multilayer Perceptron
+
 
 ## Multilayer Perceptron
 - This is the first machien learning algorithm I'll be implementing
