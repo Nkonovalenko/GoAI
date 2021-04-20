@@ -6,6 +6,7 @@
 *.gz
 *.zip
 *.npy
+*.h5
 
 # Python
 *.pyc
