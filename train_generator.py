@@ -1,4 +1,4 @@
-from dlgo.data.parallel_processor import GoDataProcessor
+from dlgo.data.processor import GoDataProcessor
 from dlgo.encoders.oneplane import OnePlaneEncoder
 
 from dlgo.networks import small
