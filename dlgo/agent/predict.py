@@ -16,3 +16,6 @@ class DeepLearningAgent(agent):
         input_tensor = np.array([encoded_state])
         return self.model.predict(input_tensor)[0]
 
+    def select_move(self, game_state):
+        num_moves = self.encoder.board_width * self.encoder.board_height
+        move_probs = self.predict(game_state)
