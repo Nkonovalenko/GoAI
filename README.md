@@ -1,10 +1,10 @@
 # GoAI
 
-This past academic year I completed Machine Learning and Computer Vision courses at the University of Michigan. These led me to become interested in Artificial Intelligence, which will be another class I take in the upcoming fall. However until then I've decided to work on a project for my own curiosity, a bot that can play Go. 
+This past academic year I completed Machine Learning and Computer Vision courses at the University of Michigan. These led me to become interested in Artificial Intelligence, which will be another class I take in the upcoming fall. However until then I've decided to work on a project for my own curiosity, a bot that can play Go. I found a great book that will teach me about Go, the algorithms, and the development of an end to end system that will allow my GoAI to have a frontend and backend hosted on AWS. Completion of this project will give me the skills necessary to implement these algorithms for other games such as Chess.
 
 This AI will be written in Python, and in later stages of the project will be deployed to AWS so that I can test it against other players and AI's.
 
-I'm very excited with how the AI has been improving thus far in my journey. At first the AI played only random moves, but I believe that I am close to completing a neural network that trains on high level player games.
+I'm very excited with how the AI has been improving thus far in my journey. At first the AI played only random moves, but I believe that I am close to completing a neural network that trains on high level player games. I have realized that currently my laptop is bottlenecking the training of my CNN, so I am currently requesting approval for an AWS EC2 instance where I would be able to take advantage of TensorFlow's GPU acceleration.
 
 # Currently Implemented:
 - Classes to handle the GameState, Game, Board, Player, Move, Point
