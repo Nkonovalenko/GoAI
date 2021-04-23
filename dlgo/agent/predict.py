@@ -40,5 +40,14 @@ class DeepLearningAgent(agent):
                     return goboard.Move.play(point)
 
         # If no legal and non-self-destructive moves, pass
-        return goboard.Move.pass_turn()
+        return goboard.Move.pass_turn() 
+
+    def serialize(self, h5file):
+        # Serialize deep-learning agent
+        h5file.create_group('encoder')
+        h5file['encoder'].attrs['name'] = self.encoder.name()
+        h5file['encoder'].attrs['board_width'] = self.encoder.board_width
+        h5file['encoder'].attrs['board_height'] = self.encoder.board_height
+        h5file.create_group('model')
+
 
