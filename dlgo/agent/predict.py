@@ -25,3 +25,20 @@ class DeepLearningAgent(agent):
         # prevent move probabilities from getting stuck at 0 or 1
         move_probs = np.clip(move_probs, eps, 1 - eps)
         move_probs = move_probs / np.sum(move_probs)
+
+        # apply moves from ranked candidate list
+        candidates = np.arrange(num_moves)
+        # turn probabilities into ranked list of moves
+        ranked_moves = np.random.choice(
+            candidates, num_moves, replace=False, p=move_probs)
+
+        for point_idx in ranked_moves:
+            point = self.encoder.decode_point_index(point_idx)
+            if game_state.is_valid_move(goboard.Move.play(point)) and \
+                not is_point_an_eye(game_state.board, point, game_state.next_player):
+                    # starting from the top find valid move that doesnt reduce eye
+                    return goboard.Move.play(point)
+
+        # If no legal and non-self-destructive moves, pass
+        return goboard.Move.pass_turn()
+
