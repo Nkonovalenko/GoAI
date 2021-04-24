@@ -6,7 +6,7 @@ This AI will be written in Python, and in later stages of the project will be de
 
 I'm very excited with how the AI has been improving thus far in my journey. At first the AI played only random moves, but I believe that I am close to completing a neural network that trains on high level player games. I have realized that currently my laptop is bottlenecking the training of my CNN, so I am currently requesting approval for an AWS EC2 instance where I would be able to take advantage of TensorFlow's GPU acceleration.
 
-The request for an AWS EC2 instance has been approved. I will be using a Deep Learning Ubuntu AMI, specifically a p2.xlarge instance.
+The request for an AWS EC2 instance has been approved. I will be using a Deep Learning Ubuntu AMI, specifically a p2.xlarge instance. P2's have 4 vCPU's, 31 GiB memory, and support TensorFlow GPU acceleration.
 
 # Currently Implemented:
 - Classes to handle the GameState, Game, Board, Player, Move, Point
