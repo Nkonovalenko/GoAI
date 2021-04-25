@@ -28,11 +28,11 @@ def get_web_app(bot_map):
     """
     here = os.path.dirname(__file__)
     static_path = os.path.join(here, 'static')
-    app = Falsk(__name__, static_folder=static_path, static_url_path='/static')
+    app = Flask(__name__, static_folder=static_path, static_url_path='/static')
 
     @app.route('/select-move/<bot_name>', methods=['POST'])
     def select_move(bot_name):
-        context = request.json
+        content = request.json
         board_size = content['board_size']
         game_state = goboard.GameState.new_game(board_size)
         # Reply the game up to this point
@@ -55,6 +55,6 @@ def get_web_app(bot_map):
 
         return jsonify({
             'bot_move': bot_move_str,
-            'diagnostics': bot_agent.diagnostics()
+            #'diagnostics': bot_agent.diagnostics()
         })
     return app
