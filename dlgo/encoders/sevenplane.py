@@ -38,3 +38,6 @@ class SevenPlaneEncoder(Encoder):
 
     def num_points(self):
         return self.board_width * self.board_height
+
+    def shape(self):
+        return self.num_planes, self.board_height, self.board_width
