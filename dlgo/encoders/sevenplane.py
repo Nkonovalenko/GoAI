@@ -27,3 +27,7 @@ class SevenPlaneEncoder(Encoder):
                     liberty_plane += base_plane[go_string.color]
                     board_tensor[liberty_plane][row][col] = 1
         return board_tensor
+
+    def encode_point(self, point):
+        return self.board_width * (point.row - 1) + (point.col - 1)
+    
