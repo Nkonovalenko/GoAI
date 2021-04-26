@@ -35,3 +35,6 @@ class SevenPlaneEncoder(Encoder):
         row = index // self.board_width
         col = index % self.board_width
         return Point(row=row+1, col=col+1)
+
+    def num_points(self):
+        return self.board_width * self.board_height
