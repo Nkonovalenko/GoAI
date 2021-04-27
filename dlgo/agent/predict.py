@@ -6,7 +6,7 @@ from dlgo import encoders
 from dlgo import goboard
 from dlgo import kerasutil
 
-class DeepLearningAgent(agent):
+class DeepLearningAgent(Agent):
     def __init__(self, model, encoder):
         Agent.__init__(self)
         self.model = model
@@ -52,13 +52,13 @@ class DeepLearningAgent(agent):
         h5file.create_group('model')
         kerasutil.save_model_to_hdf5_group(self.model, h5file['model'])
 
-    def load_prediction_agent(h5file):
-        # Deserialize a deep learning agent from a HDF5 file
-        model = kerasutil.load_model_from_hdf5_group(h5file['model'])
-        encoder_name = h5file['encoder'].attrs['name']
-        if not isinstance(encoder_name, str):
-            encoder_name = encoder_name.decode('ascii')
-        board_width = h5file['encoder'].attrs['board_width']
-        board_height = h5file['encoder'].attrs['board_height']
-        encoder = encoders.get_encoder_by_name(encoder_name, (board_width, board_height))
-        return DeepLearningAgent(model, encoder)
+def load_prediction_agent(h5file):
+    # Deserialize a deep learning agent from a HDF5 file
+    model = kerasutil.load_model_from_hdf5_group(h5file['model'])
+    encoder_name = h5file['encoder'].attrs['name']
+    if not isinstance(encoder_name, str):
+        encoder_name = encoder_name.decode('ascii')
+    board_width = h5file['encoder'].attrs['board_width']
+    board_height = h5file['encoder'].attrs['board_height']
+    encoder = encoders.get_encoder_by_name(encoder_name, (board_width, board_height))
+    return DeepLearningAgent(model, encoder)
