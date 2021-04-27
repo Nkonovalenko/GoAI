@@ -25,7 +25,8 @@ The request for an AWS EC2 instance has been approved. I will be using a Deep Le
 # Current Goals for Implementation:
 - Developing a front-end for the GoAI
 - Deploying the GoAI to AWS so that it can compete online
-- Training GoAI on AWS or GoogleColab with TensorFlow GPU acceleration
+- Training GoAI on AWS using TensorFlow GPU acceleration
+- I now have an EC2 instance set up, I need to train the model on it.
 
 
 # Lessons Learned Thus Far
