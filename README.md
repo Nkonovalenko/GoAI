@@ -27,6 +27,7 @@ The request for an AWS EC2 instance has been approved. I will be using a Deep Le
 - Deploying the GoAI to AWS so that it can compete online
 - Training GoAI on AWS using TensorFlow GPU acceleration
 - I now have an EC2 instance set up, I need to train the model on it.
+- Figure out how to make the bot communicate with other bots
 
 
 # Lessons Learned Thus Far
