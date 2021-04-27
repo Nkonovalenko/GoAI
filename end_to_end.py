@@ -1,7 +1,9 @@
 import h5py
 
+from tensorflow import keras
+from tensorflow.keras import layers
 from tensorflow.keras.models import Sequential
-from keras.layers import Dense
+from tensorflow.keras.layers import Dense
 
 from dlgo.agent.predict import DeepLearningAgent, load_prediction_agent
 from dlgo.data.parallel_processor import GoDataProcessor
@@ -28,7 +30,7 @@ model.fit(X, y, batch_size=128, epochs=20, verbose=1)
 
 # After training, create Go Bot and save in HDF5
 deep_learning_bot = DeepLearningAgent(model, encoder)
-deep_learning_bot.serialize("../agents/deep_bot.h5")
+deep_learning_bot.serialize(h5py.File("../agents/deep_bot.h5", "w"))
 
 # Load the bot into a web application
 model_file = h5py.File("../agents/deep_bot.h5", 'r')
