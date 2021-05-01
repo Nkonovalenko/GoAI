@@ -27,3 +27,6 @@ def get(termination):
         return PassWhenOpponentPasses()
     else:
         raise ValueError("Unsupported termination strategy: {}".format(termination))
+
+class TerminationAgent(Agent):
+    
