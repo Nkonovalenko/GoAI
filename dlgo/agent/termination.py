@@ -29,4 +29,7 @@ def get(termination):
         raise ValueError("Unsupported termination strategy: {}".format(termination))
 
 class TerminationAgent(Agent):
-    
+    def __init__(self, agent, strategy=None):
+        Agent.__init__(self)
+        self.agent = agent
+        self.strategy = strategy if strategy is not None else TerminationStrategy()
