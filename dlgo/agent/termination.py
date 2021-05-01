@@ -17,6 +17,11 @@ class PassWhenOpponentPasses(TerminationStrategy):
         if game_state.last_move is not None:
             return True if game_state.last_move.is_pass else False
 
+class ResignLargeMargin(TerminationStrategy):
+    def should_resign:
+        pass
+        #implement later
+
 def get(termination):
     if termination == 'opponent_passes':
         return PassWhenOpponentPasses()
