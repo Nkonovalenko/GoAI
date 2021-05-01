@@ -8,7 +8,7 @@ I'm very excited with how the AI has been improving thus far in my journey. At f
 
 The request for an AWS EC2 instance has been approved. I will be using a Deep Learning Ubuntu AMI, specifically a p2.xlarge instance. P2's have 4 vCPU's, 31 GiB memory, and support TensorFlow GPU acceleration. 
 
-I have begun training the model on the EC2 instance, and it trains much more quickly than on my laptop. Training on 100 games was 5x faster on the EC2 instance. Now I have to train on more than 100 games, so that the model doesn't overfit.
+I have begun training the model on the EC2 instance, and it trains much more quickly than on my laptop. Training on 100 games was 5x faster on the EC2 instance. Now I have to train on more than 100 games, so that the model doesn't overfit. I will prevent the model from overfitting by first training on 1000 games, and then eventually reaching 10,000+. This will take a lot of time though even on an EC2 instance.
 
 # Currently Implemented:
 - Classes to handle the GameState, Game, Board, Player, Move, Point
