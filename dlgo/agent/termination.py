@@ -16,3 +16,9 @@ class PassWhenOpponentPasses(TerminationStrategy):
     def should_pass(self, game_state):
         if game_state.last_move is not None:
             return True if game_state.last_move.is_pass else False
+
+def get(termination):
+    if termination == 'opponent_passes':
+        return PassWhenOpponentPasses()
+    else:
+        raise ValueError("Unsupported termination strategy: {}".format(termination))
