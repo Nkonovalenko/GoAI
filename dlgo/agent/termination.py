@@ -28,6 +28,14 @@ class ResignLargeMargin(TerminationStrategy):
         def should_pass(self, game_state):
             return False
 
+        def should_resign(self, game_state):
+            self.moves_played += 1
+            if self.moves_played:
+                game_result = scoring.compute_game_result(self)
+                if game_result.winner != self.own_color and game_result.winning_margin >= self.margin:
+                    return True
+            return False
+
 def get(termination):
     if termination == 'opponent_passes':
         return PassWhenOpponentPasses()
