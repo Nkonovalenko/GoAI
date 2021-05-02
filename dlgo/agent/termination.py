@@ -24,7 +24,9 @@ class ResignLargeMargin(TerminationStrategy):
             self.cut_off_move = cut_off_move
             self.margin = margin
             self.moves_played = 0
-        #implement later
+        
+        def should_pass(self, game_state):
+            return False
 
 def get(termination):
     if termination == 'opponent_passes':
