@@ -19,7 +19,11 @@ class PassWhenOpponentPasses(TerminationStrategy):
 
 class ResignLargeMargin(TerminationStrategy):
     def should_resign:
-        pass
+        def __init__(self, own_color, cut_off_move, margin):
+            self.own_color = own_color
+            self.cut_off_move = cut_off_move
+            self.margin = margin
+            self.moves_played = 0
         #implement later
 
 def get(termination):
