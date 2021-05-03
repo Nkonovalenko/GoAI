@@ -10,6 +10,11 @@ The request for an AWS EC2 instance has been approved. I will be using a Deep Le
 
 I have begun training the model on the EC2 instance, and it trains much more quickly than on my laptop. Training on 100 games was 5x faster on the EC2 instance. Now I have to train on more than 100 games, so that the model doesn't overfit. I will prevent the model from overfitting by first training on 1000 games, and then eventually reaching 10,000+. This will take a lot of time though even on an EC2 instance.
 
+Results found with EC2: 
+- Using the large net, it gets stuck at 0.0019 accuracy after the first few epochs
+- Using the small net, it reaches 0.2057 accuracy (20.57%) after 662 epochs, even though it reaches 18% accuracy after 139 epochs
+- The improvement past epoch 140 is minimal, and not worth the time spent training. I have to find a way to optimize this
+
 # Currently Implemented:
 - Classes to handle the GameState, Game, Board, Player, Move, Point
 - Checking superko is done through storing every GameState and iterating through them for each move (very inefficient, goboard_slow.py)
