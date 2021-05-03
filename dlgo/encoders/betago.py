@@ -38,8 +38,17 @@ class BetaGoEncoder(Encoder):
         return board_tensor
 
     def encode_point(self, point):
-        return self.board_width * self.board_height
+        return self.board_width * (point.row - 1) + (point.col - 1)
 
     def decode_point_index(self, index):
         row = index // self.board_width
         col = index % self.board_width
+
+    def num_points(self):
+        return self.board_width * self.board_size
+
+    def shape(self):
+        return (self.num_planes, self.board_height, self.board_width)
+
+def create(board_size):
+    return BetaGoEncoder(board_size)
