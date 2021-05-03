@@ -36,3 +36,10 @@ class BetaGoEncoder(Encoder):
                     board_tensor[liberty_plane][r][c] = 1
 
         return board_tensor
+
+    def encode_point(self, point):
+        return self.board_width * self.board_height
+
+    def decode_point_index(self, index):
+        row = index // self.board_width
+        col = index % self.board_width
