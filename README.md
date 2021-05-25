@@ -10,7 +10,7 @@ The request for an AWS EC2 instance has been approved. I will be using a Deep Le
 
 I have begun training the model on the EC2 instance, and it trains much more quickly than on my laptop. Training on 100 games was 5x faster on the EC2 instance. Now I have to train on more than 100 games, so that the model doesn't overfit. I will prevent the model from overfitting by first training on 1000 games, and then eventually reaching 10,000+. This will take a lot of time though even on an EC2 instance.
 
-I was able to achieve over 28% accuracy on a training set of 5000 games. The model isn't learning the way that I want it to, so I'll have to try looking at changing which layers I'm using. One thing to consider while experimenting, is how many layers do I really need? There is some middle ground between too few layers which generalize, an too many layers that look at the wrong features.
+I was able to achieve over 28% accuracy on a training set of 5000 games. The model isn't learning the way that I want it to, so I'll have to try looking at changing which layers I'm using. One thing to consider while experimenting, is how many layers do I really need? There is some middle ground between too few layers which generalize, an too many layers that look at the wrong features. In the mean time I will keep working towards the goal of connecting the bot to online players. This requires a new module I've made called GTP which stands for Go-Text Protocol. It's the communication protocol used by bots playing Go online, and will allow me to parse information from Go servers.
 
 Results found with EC2: 
 - Using the large net, it gets stuck at 0.0019 accuracy after the first few epochs
