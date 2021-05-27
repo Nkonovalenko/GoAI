@@ -5,3 +5,6 @@ class SGFWriter:
 
         self.letters = 'abcdefghijklmnopqrs'
         self.sgf = "(;GM[1]FF[4]CA[UTF-8]SZ[19]RU[Chinese]\n"
+
+    def append(self, text):
+        self.sgf = self.sgf + text
