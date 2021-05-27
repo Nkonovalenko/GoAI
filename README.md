@@ -38,6 +38,7 @@ Results found with EC2:
 - I now have an EC2 instance set up, I need to train the model on it.
 - Figure out how to make the bot communicate with other bots
 - Figure out how to let other players play against my bot on a Go Server
+- Figure out how to connect my frontend or my model to Go Servers online.
 
 
 # Lessons Learned Thus Far
