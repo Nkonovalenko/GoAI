@@ -13,4 +13,7 @@ class SGFWriter:
         self.sgf = self.sgf + ")\n"
         with open(self.output_sgf, 'w') as f:
             f.write(self.sgf)
-    
+
+    def coordinates(self, move):
+        point = move.point
+        return self.letters[point.col - 1] + self.letters[19 - point.row]
