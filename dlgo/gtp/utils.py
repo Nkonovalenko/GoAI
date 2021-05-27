@@ -8,3 +8,9 @@ class SGFWriter:
 
     def append(self, text):
         self.sgf = self.sgf + text
+
+    def write_sgf(self):
+        self.sgf = self.sgf + ")\n"
+        with open(self.output_sgf, 'w') as f:
+            f.write(self.sgf)
+    
