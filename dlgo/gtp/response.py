@@ -13,3 +13,5 @@ class Response:
 def success(body=''):
     return Response(status=True, body=body)
 
+def error(body=''):
+    return Response(status=False, body=body)
