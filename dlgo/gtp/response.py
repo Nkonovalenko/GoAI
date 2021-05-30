@@ -15,3 +15,6 @@ def success(body=''):
 
 def error(body=''):
     return Response(status=False, body=body)
+
+def bool_response(boolean):
+    return success('true') if boolean is True else success('false')
