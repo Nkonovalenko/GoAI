@@ -4,9 +4,7 @@ This past academic year I completed Machine Learning and Computer Vision courses
 
 This AI will be written in Python, and in later stages of the project will be deployed to AWS so that I can test it against other players and AI's.
 
-I'm very excited with how the AI has been improving thus far in my journey. At first the AI played only random moves, but I believe that I am close to completing a neural network that trains on high level player games. I have realized that currently my laptop is bottlenecking the training of my CNN, so I am currently requesting approval for an AWS EC2 instance where I would be able to take advantage of TensorFlow's GPU acceleration.
-
-The request for an AWS EC2 instance has been approved. I will be using a Deep Learning Ubuntu AMI, specifically a p2.xlarge instance. P2's have 4 vCPU's, 31 GiB memory, and support TensorFlow GPU acceleration. 
+I'm very excited with how the AI has been improving thus far in my journey. At first the AI played only random moves, but I believe that I am close to completing a neural network that trains on high level player games. I have realized that currently my laptop is bottlenecking the training of my CNN, so I am currently requesting approval for an AWS EC2 instance where I would be able to take advantage of TensorFlow's GPU acceleration. The request for an AWS EC2 instance has been approved. I will be using a Deep Learning Ubuntu AMI, specifically a p2.xlarge instance. P2's have 4 vCPU's, 31 GiB memory, and support TensorFlow GPU acceleration. 
 
 I have begun training the model on the EC2 instance, and it trains much more quickly than on my laptop. Training on 100 games was 5x faster on the EC2 instance. Now I have to train on more than 100 games, so that the model doesn't overfit. I will prevent the model from overfitting by first training on 1000 games, and then eventually reaching 10,000+. This will take a lot of time though even on an EC2 instance.
 
