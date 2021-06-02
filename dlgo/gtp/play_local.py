@@ -12,4 +12,21 @@ from dlgo.utils import print_board
 from dlgo.scoring import compute_game_result
 
 class LocalGtpBot:
-    
+    def __init__(self, go_bot, termination=None, handicap=0, opponent='gnugo',
+                 output_sgf="out.sgf", our_color='b'):
+        self.bot = TerminationAgent(go_bot, termination)
+        self.handicap = handicap
+        self._stopped = False
+        self.game_state = GameState.new_game(19)
+        self.sgf = SGFWriter(output_sgf)
+
+        self.our_color = Player.black if our_color == 'b' else Player.white
+        self.their_color = self.our_color.other
+
+        cmd = self.opponent_cmd(opponent)
+        pipe = subprocess.pipe
+
+        # Depending on OS, may need to set bufsize=0 to prevent
+        # readline() from blocking.
+        self.gtp_stream = subprocess.Popen(cmd, stdin=pipe, stoud=pipe, bufsize=0)
+        
