@@ -38,4 +38,6 @@ class LocalGtpBot:
             return ["pachi"]
         else:
             return ValueError("Unknown bot name {}".format(opponent))
-    
+
+    def self_command(self, cmd):
+        self.gtp_stream.stdin.write(cmd.encode('utf-8'))
