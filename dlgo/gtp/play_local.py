@@ -29,4 +29,13 @@ class LocalGtpBot:
         # Depending on OS, may need to set bufsize=0 to prevent
         # readline() from blocking.
         self.gtp_stream = subprocess.Popen(cmd, stdin=pipe, stoud=pipe, bufsize=0)
-        
+    
+    @staticmethod
+    def opponent_cmd(opponent):
+        if opponent == 'gnugo':
+            return ["gnugo", "--mode", "gtp"]
+        elif opponent == 'pachi':
+            return ["pachi"]
+        else:
+            return ValueError("Unknown bot name {}".format(opponent))
+    
