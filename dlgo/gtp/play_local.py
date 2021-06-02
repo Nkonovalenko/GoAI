@@ -10,3 +10,6 @@ from dlgo.gtp.board import gtp_position_to_coords, coords_to_gtp_position
 from dlgo.gtp.utils import SGFWriter
 from dlgo.utils import print_board
 from dlgo.scoring import compute_game_result
+
+class LocalGtpBot:
+    
