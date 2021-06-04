@@ -41,3 +41,19 @@ class LocalGtpBot:
 
     def self_command(self, cmd):
         self.gtp_stream.stdin.write(cmd.encode('utf-8'))
+
+    def get_response(self):
+        succeeded = False
+        result = ''
+        while not succeeded:
+            line = self.gtp_stream.stdout.readline()
+            if line[0] == '=':
+                succeeded = True
+                line = line.strip()
+                result = re.sub('^= ?', '', line)
+        return result
+
+    def command_and_response(self, cmd):
+        self.send_command(cmd)
+        return self.get_response()
+    
