@@ -57,3 +57,8 @@ class LocalGtpBot:
         self.send_command(cmd)
         return self.get_response()
     
+    def run(self):
+        self.command_and_response("boardsize 19\n")
+        self.set_handicap()
+        self.play()
+        self.sgf.write_sgf()
