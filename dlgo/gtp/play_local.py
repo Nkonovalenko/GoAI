@@ -62,3 +62,9 @@ class LocalGtpBot:
         self.set_handicap()
         self.play()
         self.sgf.write_sgf()
+
+    def set_handicap(self):
+        if self.handicap == 0:
+            self.command_and_response("komi 7.5\n")
+            self.sgf.append("KM[7.5]\n")
+
