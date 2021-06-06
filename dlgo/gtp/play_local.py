@@ -74,3 +74,14 @@ class LocalGtpBot:
             self.game_state = self.game_state.apply_move(move)
             sgf_handicap = sgf_handicap + "[" + self.sgf.coordinates(move) + "]"
         self.sgf.append(sgf_handicap + "\n")
+
+    def play(self):
+        while not self._stopped:
+            if self.game_state.next_player == self.our_color:
+                self.play_our_move()
+            else:
+                self.play_their_move()
+            print(chr(27) + "[2J")
+            print_board(self.game_state.board)
+            print("Estimated result: ")
+            print(compute_game_result(self.game_state))
