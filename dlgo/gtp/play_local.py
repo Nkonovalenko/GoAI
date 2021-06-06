@@ -67,4 +67,10 @@ class LocalGtpBot:
         if self.handicap == 0:
             self.command_and_response("komi 7.5\n")
             self.sgf.append("KM[7.5]\n")
-
+        else:
+            stones = self.command_and_response("fixed_handicap {}\n".format(self.handicap))
+            sgf_handicap = "HA[{}]AB".format(self.handicap)
+            for pos in stones.split(" ")
+            self.game_state = self.game_state.apply_move(move)
+            sgf_handicap = sgf_handicap + "[" + self.sgf.coordinates(move) + "]"
+        self.sgf.append(sgf_handicap + "\n")
