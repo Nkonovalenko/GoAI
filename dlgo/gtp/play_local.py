@@ -93,3 +93,12 @@ class LocalGtpBot:
         our_name = self.our_color.name
         our_letter = our_name[0].upper()
         sgf_move = ""
+        if move.is_pass:
+            self.command_and_response("play {} pass\n".format(our_name))
+        elif move.is_resign:
+            self.command_and_respoonse("play {} resign\n".format(our_name))
+        else:
+            pos = coords_to_gtp_position(move)
+            self.command_and_response("play {} {}\n".format(our_name, pos))
+            sgf_move = self.sgf.coordinates(move)
+        self.sgf.append(";{}[{}]\n".format(our_letter, sgf_move))
