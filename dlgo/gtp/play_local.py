@@ -85,3 +85,11 @@ class LocalGtpBot:
             print_board(self.game_state.board)
             print("Estimated result: ")
             print(compute_game_result(self.game_state))
+
+    def play_our_move(self):
+        move = self.bot.select_move(self.game_state)
+        self.game_state = self.game_state.apply_move(move)
+
+        our_name = self.our_color.name
+        our_letter = our_name[0].upper()
+        sgf_move = ""
