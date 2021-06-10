@@ -102,3 +102,10 @@ class LocalGtpBot:
             self.command_and_response("play {} {}\n".format(our_name, pos))
             sgf_move = self.sgf.coordinates(move)
         self.sgf.append(";{}[{}]\n".format(our_letter, sgf_move))
+
+    def play_their_move(self):
+        their_name = self.their_color.name
+        their_letter = their_name[0].upper()
+
+        pos = self.command_and_response("genmove {}\n".format(their_name))
+        if pos.
