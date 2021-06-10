@@ -108,4 +108,15 @@ class LocalGtpBot:
         their_letter = their_name[0].upper()
 
         pos = self.command_and_response("genmove {}\n".format(their_name))
-        if pos.
+        if pos.lower() == 'resign':
+            self.game_state = self.game_state.apply_move(Move.resign())
+            self._stopped = True
+        elif pos.lower() == 'pass':
+            self.game_state = self.game_state.apply_move(Move.pass_turn())
+            self.sgf.append(";{}[]\n".format(their_letter))
+            if self.game_state.last_move.is_pass:
+                self._stopped = True
+        else:
+            move = gtp_position_to_coords(pos)
+            self.game_state = self.game_state.apply_move(move)
+            self.sgf.append(";{}[{}]\n".format(their_letter, self.sgf.coordinates(move)))
