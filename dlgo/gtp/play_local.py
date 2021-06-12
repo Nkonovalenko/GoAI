@@ -120,3 +120,9 @@ class LocalGtpBot:
             move = gtp_position_to_coords(pos)
             self.game_state = self.game_state.apply_move(move)
             self.sgf.append(";{}[{}]\n".format(their_letter, self.sgf.coordinates(move)))
+
+if __name__ == "__main__":
+    bot = load_prediction_agent(h5py.File("../../agents/betago.hdf5", "r"))
+    gnu_go = LocalGtpBot(go_bot=bot, termination=PassWhenOpponentPasses(),
+                         handicap=0, opponent='pachi',)
+    gnu_go.run()
