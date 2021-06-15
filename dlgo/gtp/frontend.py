@@ -18,3 +18,14 @@ __all__ = [
 Handles parsing GTP commands and formatting responses.
 Only supports 19x19 boards and fixed handicaps.
 """
+
+HANDICAP_STONES = {
+    2: ['D4', 'Q16'],
+    3: ['D4', 'Q16', 'D16'],
+    4: ['D4', 'Q16', 'D16', 'Q4'],
+    5: ['D4', 'Q16', 'D16', 'Q4', 'K10'],
+    6: ['D4', 'Q16', 'D16', 'Q4', 'D10', 'Q10'],
+    7: ['D4', 'Q16', 'D16', 'Q4', 'D10', 'Q10', 'K10'],
+    8: ['D4', 'Q16', 'D16', 'Q4', 'D10', 'Q10', 'K4', 'K16'],
+    9: ['D4', 'Q16', 'D16', 'Q4', 'D10', 'Q10', 'K4', 'K16', 'K10'],
+}
