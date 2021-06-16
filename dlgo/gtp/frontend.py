@@ -29,3 +29,27 @@ HANDICAP_STONES = {
     8: ['D4', 'Q16', 'D16', 'Q4', 'D10', 'Q10', 'K4', 'K16'],
     9: ['D4', 'Q16', 'D16', 'Q4', 'D10', 'Q10', 'K4', 'K16', 'K10'],
 }
+
+class GTPFrontend:
+
+    def __init__(self, termination_agent, termination=None):
+        self.agent = termination_agent
+        self.game_state = GameState.new_game(19)
+        self._input = sys.stdin
+        self._output = sys.stdout
+        self._stopped = False
+
+        self.handlers = {
+            'boardsize': self.handle_boardsize,
+            'clear_board': self.handle_clear_board,
+            'fixed_handicap': self.handle_fixed_handicap,
+            'genmove': self.handle_genmove,
+            'known_command': self.handle_known_command,
+            'komi': self.ignore,
+            'showboard': self.handle_showboard,
+            'time_settings': self.ignore,
+            'time_left': self.ignore,
+            'play': self.handle_play,
+            'protocol_version': self.handle_protocol_version,
+            'quit': self.handle_quit,
+        }
