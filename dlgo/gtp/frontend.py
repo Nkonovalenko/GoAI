@@ -53,3 +53,11 @@ class GTPFrontend:
             'protocol_version': self.handle_protocol_version,
             'quit': self.handle_quit,
         }
+        
+    def run(self):
+        while not self._stopped:
+            input_line = self._input.readline().strip()
+            cmd = command.parse(input_line)
+            resp = self.process(cmd)
+            self._output.write(response.serialize(cmd, resp))
+            self._output.flush()
