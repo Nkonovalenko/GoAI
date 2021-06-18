@@ -61,3 +61,7 @@ class GTPFrontend:
             resp = self.process(cmd)
             self._output.write(response.serialize(cmd, resp))
             self._output.flush()
+
+    def process(self, cmd):
+        handler = self.handlers.get(cmd.name, self.handle_unknown)
+        return handler(*cmd.args)
