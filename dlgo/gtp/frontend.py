@@ -65,3 +65,12 @@ class GTPFrontend:
     def process(self, cmd):
         handler = self.handlers.get(cmd.name, self.handle_unknown)
         return handler(*cmd.args)
+
+    def handle_play(self, color, move):
+        if move.lower() == 'pass':
+            self.game_state = self.game_state.apply_move(Move.pass_turn())
+        elif move.lower() == 'resign':
+            self.game_state = self.game_state.apply_move(Move.resign())
+        else:
+            self.game_state = self.game_state.apply_move(gtp_position_to_coords(move))
+        return response.success()
