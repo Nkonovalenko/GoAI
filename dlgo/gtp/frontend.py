@@ -74,3 +74,12 @@ class GTPFrontend:
         else:
             self.game_state = self.game_state.apply_move(gtp_position_to_coords(move))
         return response.success()
+
+    def handle_genmove(self, color):
+        move = self.agent.select_move(self.game_state)
+        self.game_state = self.game_state.apply_move(move)
+        if move.is_pass:
+            return response.success('pass')
+        if move.is_resign:
+            return response.success('resign')
+        return response.success(coords_to_gtp_position(move))
