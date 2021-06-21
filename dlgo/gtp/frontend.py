@@ -83,3 +83,10 @@ class GTPFrontend:
         if move.is_resign:
             return response.success('resign')
         return response.success(coords_to_gtp_position(move))
+
+    def handle_fixed_handicap(self, nstones):
+        nstones = int(nstones)
+        for stone in HANDICAP_STONES[nstones]:
+            self.game_state = self.game_state.apply_move(
+                gtp_position_to_coords(stone))
+        return response.success()
