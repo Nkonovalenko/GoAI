@@ -90,3 +90,7 @@ class GTPFrontend:
             self.game_state = self.game_state.apply_move(
                 gtp_position_to_coords(stone))
         return response.success()
+
+    def handle_quit(self):
+        self._stopped = True
+        return response.success()
