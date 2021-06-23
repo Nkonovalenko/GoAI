@@ -94,3 +94,7 @@ class GTPFrontend:
     def handle_quit(self):
         self._stopped = True
         return response.success()
+
+    def handle_clear_board(self):
+        self.game_state = GameState.new_game(19)
+        return response.success()
