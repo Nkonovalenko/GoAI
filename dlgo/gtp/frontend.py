@@ -110,3 +110,7 @@ class GTPFrontend:
     def handle_showboard(self):
         print_board(self.game_state.board)
         return response.success()
+
+    def handle_time_left(self, color, time, stones):
+        # TODO: Arguments: color color, int time, int stones
+        return response.success()
