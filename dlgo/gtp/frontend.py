@@ -98,3 +98,6 @@ class GTPFrontend:
     def handle_clear_board(self):
         self.game_state = GameState.new_game(19)
         return response.success()
+
+    def handle_known_command(self, command_name):
+        return response.bool_response(command_name in self.handlers.keys())
