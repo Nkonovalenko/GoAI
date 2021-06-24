@@ -106,3 +106,7 @@ class GTPFrontend:
         if int(size) != 19:
             return response.error('Only 19x19 currently supported, requested {}'.format(size))
         return response.success()
+
+    def handle_showboard(self):
+        print_board(self.game_state.board)
+        return response.success()
