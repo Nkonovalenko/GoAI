@@ -118,3 +118,6 @@ class GTPFrontend:
     def handle_time_settings(self, main_time, byo_yomi_time, byo_yomi_stones):
         # TODO: Arguments: int main_time, int byo_yomi_time, int byo_yomi_stones
         return response.success()
+
+    def handle_unknown(self, *args):
+        return response.error('Unrecognized command')
