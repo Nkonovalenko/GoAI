@@ -122,10 +122,8 @@ class GTPFrontend:
     def handle_unknown(self, *args):
         return response.error('Unrecognized command')
 
-
     def ignore(self, *args):
         return response.success()
-
 
     def handle_protocol_version(self):
         return response.success('2')
