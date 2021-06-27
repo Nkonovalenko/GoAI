@@ -33,6 +33,7 @@ HANDICAP_STONES = {
 class GTPFrontend:
 
     def __init__(self, termination_agent, termination=None):
+        """Initialize frontend."""
         self.agent = termination_agent
         self.game_state = GameState.new_game(19)
         self._input = sys.stdin
@@ -55,6 +56,7 @@ class GTPFrontend:
         }
         
     def run(self):
+        """Main run function."""
         while not self._stopped:
             input_line = self._input.readline().strip()
             cmd = command.parse(input_line)
@@ -63,10 +65,12 @@ class GTPFrontend:
             self._output.flush()
 
     def process(self, cmd):
+        """Handle process."""
         handler = self.handlers.get(cmd.name, self.handle_unknown)
         return handler(*cmd.args)
 
     def handle_play(self, color, move):
+        """Making a pass/resign."""
         if move.lower() == 'pass':
             self.game_state = self.game_state.apply_move(Move.pass_turn())
         elif move.lower() == 'resign':
@@ -76,6 +80,7 @@ class GTPFrontend:
         return response.success()
 
     def handle_genmove(self, color):
+        """Making a generic move."""
         move = self.agent.select_move(self.game_state)
         self.game_state = self.game_state.apply_move(move)
         if move.is_pass:
