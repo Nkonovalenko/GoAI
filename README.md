@@ -37,6 +37,8 @@ Results found with EC2:
 - Figure out how to make the bot communicate with other bots
 - Figure out how to let other players play against my bot on a Go Server
 - Figure out how to connect my frontend or my model to Go Servers online.
+- Implement Q Learning
+- Implement unsupervised learning
 
 
 # Lessons Learned Thus Far
