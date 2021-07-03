@@ -130,6 +130,7 @@ class GTPFrontend:
         return response.error('Unrecognized command')
 
     def ignore(self, *args):
+        """Handle ignore case."""
         return response.success()
 
     def handle_protocol_version(self):
