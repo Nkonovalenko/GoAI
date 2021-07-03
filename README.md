@@ -39,6 +39,8 @@ Results found with EC2:
 - Figure out how to connect my frontend or my model to Go Servers online.
 - Implement Q Learning
 - Implement unsupervised learning
+- Go through each file and do style checks
+- Ensure files have detailed comments
 
 
 # Lessons Learned Thus Far
