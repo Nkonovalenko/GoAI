@@ -90,6 +90,7 @@ class GTPFrontend:
         return response.success(coords_to_gtp_position(move))
 
     def handle_fixed_handicap(self, nstones):
+        """Add handicap stones."""
         nstones = int(nstones)
         for stone in HANDICAP_STONES[nstones]:
             self.game_state = self.game_state.apply_move(
@@ -97,22 +98,27 @@ class GTPFrontend:
         return response.success()
 
     def handle_quit(self):
+        """Stop the game."""
         self._stopped = True
         return response.success()
 
     def handle_clear_board(self):
+        """Clear board by creating new game."""
         self.game_state = GameState.new_game(19)
         return response.success()
 
     def handle_known_command(self, command_name):
+        """Checkc that command is in handlers.keys()."""
         return response.bool_response(command_name in self.handlers.keys())
 
     def handle_boardsize(self, size):
+        """Check board is 19x19."""
         if int(size) != 19:
             return response.error('Only 19x19 currently supported, requested {}'.format(size))
         return response.success()
 
     def handle_showboard(self):
+        """Show the board."""
         print_board(self.game_state.board)
         return response.success()
 
