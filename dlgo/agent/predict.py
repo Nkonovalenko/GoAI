@@ -7,7 +7,9 @@ from dlgo import goboard
 from dlgo import kerasutil
 
 class DeepLearningAgent(Agent):
+    """Deep Learning Agent Class."""
     def __init__(self, model, encoder):
+        """Constructor for Deep Learning Agent."""
         Agent.__init__(self)
         self.model = model
         self.encoder = encoder
