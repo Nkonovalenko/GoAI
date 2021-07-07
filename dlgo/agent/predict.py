@@ -15,11 +15,13 @@ class DeepLearningAgent(Agent):
         self.encoder = encoder
 
     def predict(self, game_state):
+        """Return predicted move."""
         encoded_state = self.encoder.encode(game_state)
         input_tensor = np.array([encoded_state])
         return self.model.predict(input_tensor)[0]
 
     def select_move(self, game_state):
+        """Select move from a ranked list."""
         num_moves = self.encoder.board_width * self.encoder.board_height
         move_probs = self.predict(game_state)
         # Increase the distance between the more likely and least likely moves
@@ -46,7 +48,7 @@ class DeepLearningAgent(Agent):
         return goboard.Move.pass_turn() 
 
     def serialize(self, h5file):
-        # Serialize deep-learning agent
+        """Serialize deep-learning agent."""
         h5file.create_group('encoder')
         h5file['encoder'].attrs['name'] = self.encoder.name()
         h5file['encoder'].attrs['board_width'] = self.encoder.board_width
@@ -55,7 +57,7 @@ class DeepLearningAgent(Agent):
         kerasutil.save_model_to_hdf5_group(self.model, h5file['model'])
 
 def load_prediction_agent(h5file):
-    # Deserialize a deep learning agent from a HDF5 file
+    """Deserialize a deep learning agent from a HDF5 file."""
     model = kerasutil.load_model_from_hdf5_group(h5file['model'])
     encoder_name = h5file['encoder'].attrs['name']
     if not isinstance(encoder_name, str):
