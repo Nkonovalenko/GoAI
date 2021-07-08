@@ -1,3 +1,6 @@
+"""End to end example. It creates the board, creates a multilayer model,
+   then trains a deep learning bot that is loaded into a web app."""
+
 import h5py
 
 from tensorflow import keras
