@@ -13,9 +13,11 @@ class BetaGoEncoder(Encoder):
         self.num_planes = 7
 
     def name(self):
+        """Return name as a string."""
         return 'betago'
 
     def encode(self, game_state):
+        """Encode the game state using 7 plane, return as tensor."""
         board_tensor = np.zeros(self.shape())
         base_plane = {
             game_state.next_player: 0,
@@ -38,17 +40,22 @@ class BetaGoEncoder(Encoder):
         return board_tensor
 
     def encode_point(self, point):
+        """Encode 1 specific point."""
         return self.board_width * (point.row - 1) + (point.col - 1)
 
     def decode_point_index(self, index):
+        """Decode a point."""
         row = index // self.board_width
         col = index % self.board_width
 
     def num_points(self):
+        """Return the number of points in the board as int."""
         return self.board_width * self.board_size
 
     def shape(self):
+        """Return the shape as a 1x3 tuple."""
         return (self.num_planes, self.board_height, self.board_width)
 
 def create(board_size):
+    """Create BetaGo Encoder."""
     return BetaGoEncoder(board_size)
