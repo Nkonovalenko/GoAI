@@ -1,3 +1,4 @@
+"""Gtp board functions."""
 from dlgo.gotypes import Point
 from dlgo.goboard_fast import Move
 
