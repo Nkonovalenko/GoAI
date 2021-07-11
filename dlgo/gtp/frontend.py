@@ -118,7 +118,7 @@ class GTPFrontend:
         return response.success()
 
     def handle_showboard(self):
-        """Show the board."""
+        """Show the board."""   
         print_board(self.game_state.board)
         return response.success()
 
