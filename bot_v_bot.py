@@ -1,3 +1,6 @@
+"""File that has two naive bots play against each other.
+   This template can be used to support other bot matches,
+   by switching lines 17 & 18 to the bot type."""
 from dlgo import agent
 from dlgo.agent import naive
 from dlgo import goboard
