@@ -1,3 +1,4 @@
+"""SGFWriter class that stores sgf files."""
 class SGFWriter:
     
     def __init__(self, output_sgf):
