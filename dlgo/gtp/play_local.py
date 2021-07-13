@@ -1,3 +1,4 @@
+"""Local Bot to play against. Hosted on local server."""
 import subprocess
 import re
 import h5py
@@ -12,8 +13,10 @@ from dlgo.utils import print_board
 from dlgo.scoring import compute_game_result
 
 class LocalGtpBot:
+    """Local Bot class."""
     def __init__(self, go_bot, termination=None, handicap=0, opponent='gnugo',
                  output_sgf="out.sgf", our_color='b'):
+        """Constructor."""
         self.bot = TerminationAgent(go_bot, termination)
         self.handicap = handicap
         self._stopped = False
@@ -32,6 +35,7 @@ class LocalGtpBot:
     
     @staticmethod
     def opponent_cmd(opponent):
+        """Opponent's command. Static method since only 1 opponent."""
         if opponent == 'gnugo':
             return ["gnugo", "--mode", "gtp"]
         elif opponent == 'pachi':
@@ -40,9 +44,11 @@ class LocalGtpBot:
             return ValueError("Unknown bot name {}".format(opponent))
 
     def self_command(self, cmd):
+        """Bot's command."""
         self.gtp_stream.stdin.write(cmd.encode('utf-8'))
 
     def get_response(self):
+        """Grab the response."""
         succeeded = False
         result = ''
         while not succeeded:
@@ -58,12 +64,14 @@ class LocalGtpBot:
         return self.get_response()
     
     def run(self):
+        """Run the bot."""
         self.command_and_response("boardsize 19\n")
         self.set_handicap()
         self.play()
         self.sgf.write_sgf()
 
     def set_handicap(self):
+        """Set a Go Handicap."""
         if self.handicap == 0:
             self.command_and_response("komi 7.5\n")
             self.sgf.append("KM[7.5]\n")
@@ -76,6 +84,7 @@ class LocalGtpBot:
         self.sgf.append(sgf_handicap + "\n")
 
     def play(self):
+        """Play a move until game ends."""
         while not self._stopped:
             if self.game_state.next_player == self.our_color:
                 self.play_our_move()
@@ -87,6 +96,7 @@ class LocalGtpBot:
             print(compute_game_result(self.game_state))
 
     def play_our_move(self):
+        """Bot makes a move."""
         move = self.bot.select_move(self.game_state)
         self.game_state = self.game_state.apply_move(move)
 
@@ -104,6 +114,7 @@ class LocalGtpBot:
         self.sgf.append(";{}[{}]\n".format(our_letter, sgf_move))
 
     def play_their_move(self):
+        """Opponent makes a move."""
         their_name = self.their_color.name
         their_letter = their_name[0].upper()
 
