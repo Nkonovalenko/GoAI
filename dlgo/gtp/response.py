@@ -1,3 +1,4 @@
+"""GTP Bot Responses."""
 __all__ = [
     'Response',
     'error',
@@ -6,17 +7,21 @@ __all__ = [
 ]
 
 class Response:
+    """Response template class."""
     def __init__(self, status, body):
         self.success = status
         self.body = body
 
 def success(body=''):
+    """Sucessful response."""
     return Response(status=True, body=body)
 
 def error(body=''):
+    """Error response."""
     return Response(status=False, body=body)
 
 def bool_response(boolean):
+    """True/False based on input response."""
     return success('true') if boolean is True else success('false')
 
 def serialize(gtp_command, gtp_response):
