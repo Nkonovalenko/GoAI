@@ -1,3 +1,4 @@
+"""Network with 3 Fully Connected layers, ReLu activation."""
 from keras.layers.core import Dense, Activation, Flatten
 
 def layers(input_shape):
