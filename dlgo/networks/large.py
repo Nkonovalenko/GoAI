@@ -1,3 +1,5 @@
+"""Large Network. Zero Padding followed by 2D Convolution with ReLu Activation
+   Repeated 7 times, then put through 1 Fully connected layer."""
 from __future__ import absolute_import
 from keras.layers.core import Dense, Activation, Flatten
 from keras.layers.convolutional import Conv2D, ZeroPadding2D
