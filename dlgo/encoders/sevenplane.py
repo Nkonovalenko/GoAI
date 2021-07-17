@@ -1,3 +1,4 @@
+"""7 Dimensional Encoder."""
 import numpy as np
 
 from dlgo.encoders.base import Encoder
@@ -12,6 +13,7 @@ class SevenPlaneEncoder(Encoder):
         return 'sevenplane'
 
     def encode(self, game_state):
+        """Encode gamestate into a tensor."""
         board_tensor = np.zeros(self.shape())
         base_plane = {game_state.next_player: 0,
                       game_state.next_player.other: 3}
@@ -29,18 +31,23 @@ class SevenPlaneEncoder(Encoder):
         return board_tensor
 
     def encode_point(self, point):
+        """Encode a single point."""
         return self.board_width * (point.row - 1) + (point.col - 1)
 
     def decode_point_index(self, index):
+        """Decode an index into a single point."""
         row = index // self.board_width
         col = index % self.board_width
         return Point(row=row+1, col=col+1)
 
     def num_points(self):
+        """Return the number of points on the board."""
         return self.board_width * self.board_height
 
     def shape(self):
+        """Shape of the encoder."""
         return self.num_planes, self.board_height, self.board_width
 
 def create(board_size):
+    """Create the encoder."""
     return SevenPlaneEncoder(board_size)
