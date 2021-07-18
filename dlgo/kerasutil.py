@@ -1,3 +1,4 @@
+"""Utilities file used by keras to save and load hdf5 models."""
 import tempfile
 import os
 
