@@ -1,15 +1,19 @@
+"""Data generator class file."""
 import glob
 import numpy as np
 from keras.utils import to_categorical
 
 class DataGenerator:
+    """Data Generator class."""
     def __init__(self, data_directory, samples):
+        """Constructor."""
         self.data_directory = data_directory
         self.samples = samples
         self.files = set(file_name for file_name, index in samples)
         self.num_samples = None
 
     def get_num_samples(self, batch_size=128, num_classes=19*19):
+        """Get the number of samples available."""
         if self.num_samples is not None:
             return self.num_samples
         else:
@@ -19,6 +23,7 @@ class DataGenerator:
             return self.num_samples
 
     def _generate(self, batch_size, num_classes):
+        """generate helper function."""
         for zip_file_name in self.files:
             file_name = zip_file_name.replace('.tar.gz', '') + 'train'
             base = self.data_directory + '/' + file_name + '_features_*.npy'
@@ -34,6 +39,7 @@ class DataGenerator:
                     yield x_batch, y_batch
 
     def generate(self, batch_size=128, num_classes=19*19):
+        """Generate data."""
         while True:
             for item in self._generate(batch_size, num_classes):
                 yield item
