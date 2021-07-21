@@ -1,3 +1,4 @@
+"""Contains Sampler class for data."""
 from __future__ import print_function
 from __future__ import absolute_import
 import os
@@ -20,6 +21,7 @@ class Sampler:
         self.compute_test_samples()
 
     def draw_data(self, data_type, num_samples):
+        """Get certain amount of training data."""
         if data_type == 'test':
             return self.test_games
         elif data_type == 'train' and num_samples is not None:
