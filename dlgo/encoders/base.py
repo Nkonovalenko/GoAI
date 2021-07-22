@@ -1,3 +1,4 @@
+"""Template for encoder classes."""
 import importlib
 
 __all__ = [
