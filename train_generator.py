@@ -1,3 +1,4 @@
+"""File to train generator."""
 from dlgo.data.parallel_processor import GoDataProcessor
 from dlgo.encoders.oneplane import OnePlaneEncoder
 
@@ -24,7 +25,7 @@ generator = processor.load_go_data('train', num_samples=num_games,use_generator=
 print("Creating test generator...")
 test_generator = processor.load_go_data('test', num_games, use_generator=True)
 
-# Define neural network
+# Define neural network based on small model
 print("Defining neural network...")
 input_shape = (encoder.num_planes, go_board_rows, go_board_cols)
 network_layers = small.layers(input_shape)
