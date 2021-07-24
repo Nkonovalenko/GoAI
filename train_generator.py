@@ -32,6 +32,7 @@ network_layers = small.layers(input_shape)
 model = Sequential()
 for layer in network_layers:
     model.add(layer)
+# After adding all small layers, add fully connected layer with softmax activation
 model.add(Dense(num_classes, activation='softmax'))
 model.compile(loss='categorical_crossentropy', optimizer='sgd', metrics=['accuracy'])
 
