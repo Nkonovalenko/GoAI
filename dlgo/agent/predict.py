@@ -1,3 +1,4 @@
+"""First prediction agent based on neural network."""
 import numpy as np
 
 from dlgo.agent.base import Agent
