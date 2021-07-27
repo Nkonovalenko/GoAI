@@ -14,6 +14,7 @@ from dlgo.encoders.sevenplane import SevenPlaneEncoder
 from dlgo.httpfrontend import get_web_app
 from dlgo.networks import large
 
+# This example uses a 19x19 board, with the Seven Plane Encoder
 go_board_rows, go_board_cols = 19, 19
 nb_classes = go_board_rows * go_board_cols
 encoder = SevenPlaneEncoder((go_board_rows, go_board_cols))
